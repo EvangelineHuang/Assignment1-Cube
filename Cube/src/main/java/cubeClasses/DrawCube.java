@@ -3,9 +3,12 @@ package cubeClasses;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class DrawCube extends JFrame{
@@ -22,18 +25,30 @@ public class DrawCube extends JFrame{
 	public DrawCube()
 	{
 		//to  Set JFrame title
-		super("Draw A Rectangle In JFrame");
+		super("Draw a Cube");
 
 		//Set default close operation for JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		JPanel panel = new JPanel();
+		this.getContentPane().add(panel);
+		JButton back = new JButton();
+		back.setText("Back");		
+		panel.add(back);
+		back.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	             back.setText("Ok Button is clicked here");
+	          }});
+		JButton forward = new JButton();
+		forward.setText("Forward");		
+		panel.add(forward);
+		
 		//Set JFrame size
 		setSize(500,500);
 
 		//Make JFrame visible
 		setVisible(true);
 	}
-
+	
 	public void paint(Graphics g)
 	{
 		super.paint(g);
@@ -47,12 +62,11 @@ public class DrawCube extends JFrame{
 		//fill rectangle with GREEN color
 		g.fillRect(50,50,30,30);
 	}
+	
 
 	public static void main(String[] args) 
 	{
-		JFrame frame = new JFrame("My Drawing");
 		@SuppressWarnings("unused")
 		DrawCube cube=new DrawCube();
-		frame.setVisible(true);
 	}
 }

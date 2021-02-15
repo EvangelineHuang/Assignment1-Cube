@@ -8,8 +8,6 @@ public class Face
 	Face faceUp;
 	Face faceDown;
 	
-	
-	
 	public Face(String color)
 	{
 		//Creates a solved face of all the same color, what color that is is determined by the method call

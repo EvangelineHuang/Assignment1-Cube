@@ -2,7 +2,7 @@ package cubeClasses;
 
 import java.util.Random;
 
-public class Cube 
+public class Cube implements A1Cube
 {
 	//red=0, yellow=1, green=2, black=3, white = 4, orange = 5
 	Face[] Faces;
@@ -52,7 +52,7 @@ public class Cube
 		Faces[5].setFaceLeft(Faces[3]);
 	}
 	
-	void shuffle()
+	public void shuffle()
 	{
 		//does a set of random operations on the cube so that it becomes shuffled while still being solvable, as it was made with moves the manipulator can replicate
 		Random gen = new Random();
@@ -71,10 +71,52 @@ public class Cube
 				Faces[current].counterclockwise(current);
 			}
 		}
-		isSolved = checkSolved();
+		isSolved = isSolved();
 	}
 	
-	boolean checkSolved() {
+	public A1Cube clone() 
+	{
+		return null;		
+	}
+
+	@Override
+	public void front(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void back(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void left(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void right(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void up(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void down(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isSolved() {
 		//checks if the cube has been solved, returns true if it has been
 		//solved in this case means that all sides are only single colored, not that all squares are in their original places
 		boolean solved=true;
@@ -94,4 +136,17 @@ public class Cube
 		
 		return solved;
 	}
+
+	@Override
+	public void randomize(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
