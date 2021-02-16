@@ -54,13 +54,17 @@ public class DrawCube extends JFrame{
 		super.paint(g);
 
 		//draw rectangle outline
-		g.drawRect(50,50,30,30);
+		g.drawRect(200,200,30,30);
 
 		//set color to Green
-		g.setColor(Color.GREEN);
+		g.setColor(Color.RED);
 
 		//fill rectangle with GREEN color
-		g.fillRect(50,50,30,30);
+		g.fillRect(200,200,30,30);
+		g.drawRect(230,230,30,30);
+		g.fillRect(230,230,30,30);
+		g.drawRect(230,200,30,30);
+		g.fillRect(230,200,30,30);
 	}
 	
 
