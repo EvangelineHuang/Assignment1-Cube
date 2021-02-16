@@ -8,7 +8,7 @@ public class Cube implements A1Cube
 	Face[] Faces;
 	boolean isSolved;
 	
-	public void genCube()
+	public Cube()
 	{
 		isSolved = true;
 		
@@ -167,11 +167,11 @@ public class Cube implements A1Cube
 			selection = gen.nextInt(1);
 			if(selection == 0)
 			{
-				Faces[current].clockwise(current);
+				Faces[current].clockwise();
 			}
 			else if(selection ==1)
 			{
-				Faces[current].counterclockwise(current);
+				Faces[current].counterclockwise();
 			}
 		}
 		isSolved = isSolved();

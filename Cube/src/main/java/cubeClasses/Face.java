@@ -3,6 +3,10 @@ package cubeClasses;
 public class Face 
 {
 	Square[][] squares;
+	Face faceLeft;
+	Face faceRight;
+	Face faceUp;
+	Face faceDown;
 	
 	public Face(String color)
 	{
@@ -15,6 +19,46 @@ public class Face
 		squares[1][1] = new Square(color,4);
 	}
 	
+	public Face getFaceLeft() {
+		return faceLeft;
+	}
+
+
+	public void setFaceLeft(Face faceLeft) {
+		this.faceLeft = faceLeft;
+	}
+
+
+	public Face getFaceRight() {
+		return faceRight;
+	}
+
+
+	public void setFaceRight(Face faceRighr) {
+		this.faceRight = faceRighr;
+	}
+
+
+	public Face getFaceUp() {
+		return faceUp;
+	}
+
+
+	public void setFaceUp(Face faceUp) {
+		this.faceUp = faceUp;
+	}
+
+
+	public Face getFaceDown() {
+		return faceDown;
+	}
+
+
+	public void setFaceDown(Face faceDown) {
+		this.faceDown = faceDown;
+	}
+
+	
 	
 	//These are the two methods that correspond to the rotations the manipulator could make
 	
@@ -25,6 +69,14 @@ public class Face
 	public Square[][] getSquares()
 	{
 		return squares;
+	}
+	public void clockwise()
+	{
+		
+	}
+	public void counterclockwise() 
+	{
+		
 	}
 	
 	
