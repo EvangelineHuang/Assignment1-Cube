@@ -1,0 +1,95 @@
+package cubeClasses;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+//This is the GUI of the Cube. Every time a button get clicked on, the unfolded 
+//cube will display how a real cube is rotated.
+//When the cube is rotated, all the squares will be repainted.
+@SuppressWarnings("serial")
+public class GUI extends JFrame{
+
+	static Color color = Color.red;// This is just used for test. 
+	A1Cube cube = new Cube();//The cube that will be painted 
+	//button listener will be 
+	public GUI()
+	{
+		//to set title
+		super("Draw a Cube");
+		JPanel p = new JPanel();
+		//set close button operation
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().add(p);
+		//create back button for rotating
+		JButton back = new JButton();
+		back.setText("Back");		
+		p.add(back);
+		//button action listener, will repaint the cube
+		back.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	  //panel.removeAll();
+	        	  color = Color.green;
+	        	  repaint();
+	        	  //addButton();
+	          }});
+		//create forward button
+		JButton forward = new JButton();
+		forward.setText("Forward");		
+		p.add(forward);
+		forward.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	  //panel.removeAll();
+	        	  color = Color.green;
+	        	  repaint();
+	        	  //addButton();
+	          }});
+		//create up button
+		//create down button
+		// create left button
+		//create right button
+		//there will be two extra buttons called clockwise and counterclockwise
+		//which will be visible after one of the six buttons is clicked. 
+		//set size
+		setSize(500,500);
+
+		//make visible
+		setVisible(true);
+	}
+	//this is the method that is used to paint the cube, it is inherited from JFrame
+	public void paint(Graphics g)
+	{
+		//this method will go through all the squares of a cube use the color attribute 
+		//and xPos, yPos attribute to draw squares. 
+		super.paint(g);
+
+		//draw rectangle outline
+		g.drawRect(200,200,30,30);
+
+		//set color to Green
+		g.setColor(color);
+
+		//fill rectangle with color
+		g.fillRect(200,200,30,30);
+		g.drawRect(230,230,30,30);
+		g.fillRect(230,230,30,30);
+		g.drawRect(230,200,30,30);
+		g.fillRect(230,200,30,30);
+	    
+	}
+	//this is the update, every time a button is clicked, the GUI will be updated using 
+	//this method. it is inherited from JFrame, it is the same as paint();
+	public void update(Graphics g) 
+	{
+		super.update(g);
+	}
+	@SuppressWarnings("unused")
+	//main function that will run start setting up the GUI
+	public static void main(String[] args) 
+	{
+		GUI drawCube=new GUI();
+	}
+}

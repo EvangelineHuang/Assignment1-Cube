@@ -5,13 +5,14 @@ import java.util.Random;
 public class Cube implements A1Cube
 {
 	//red=0, yellow=1, green=2, black=3, white = 4, orange = 5
-	Face[] Faces;
-	boolean isSolved;
+	Face[] Faces; //keep all six faces of the cube 
+	boolean isSolved;// flag that is used to keep track of if the cube is in solved state. 
 	
 	public Cube()
 	{
-		isSolved = true;
+		isSolved = true;//the cube is solved when it is just created. 
 		
+		// add all the faces to the cube along with the color of each face. 
 		Faces[0]=new Face("red");
 		Faces[1]=new Face("yellow");
 		Faces[2]=new Face("green");
@@ -20,47 +21,53 @@ public class Cube implements A1Cube
 		Faces[5]=new Face("orange");
 
 		
-		//sets the adjacent face values
+		//sets the adjacent face values for the first face
 		Faces[0].setFaceUp(Faces[1]);
 		Faces[0].setFaceRight(Faces[2]);
 		Faces[0].setFaceDown(Faces[4]);
 		Faces[0].setFaceLeft(Faces[5]);
-		
+		//second face
 		Faces[1].setFaceUp(Faces[3]);
 		Faces[1].setFaceRight(Faces[2]);
 		Faces[1].setFaceDown(Faces[0]);
 		Faces[1].setFaceLeft(Faces[5]);
-		
+		//third face
 		Faces[2].setFaceUp(Faces[1]);	
 		Faces[2].setFaceRight(Faces[3]);
 		Faces[2].setFaceDown(Faces[4]);
 		Faces[2].setFaceLeft(Faces[0]);
-		
+		//fourth face
 		Faces[3].setFaceUp(Faces[1]);
 		Faces[3].setFaceRight(Faces[5]);
 		Faces[3].setFaceDown(Faces[4]); 	
 		Faces[3].setFaceLeft(Faces[2]);
-		
+		//fifth face
 		Faces[4].setFaceUp(Faces[0]);
 		Faces[4].setFaceRight(Faces[2]);
 		Faces[4].setFaceDown(Faces[3]);
 		Faces[4].setFaceLeft(Faces[5]);
-		
+		//sixth face
 		Faces[5].setFaceUp(Faces[1]);
 		Faces[5].setFaceRight(Faces[0]);
 		Faces[5].setFaceDown(Faces[4]);
 		Faces[5].setFaceLeft(Faces[3]);
 	}
 	
-	
+	//return an exact same cube as the current one 
 	public A1Cube clone() 
 	{
 		return null;		
 	}
-
+	//this will be used to traverse the whole cube when clone a new one.
+	public void traverse()
+	{
+		
+	}
+	//all of the six methods below are inherited from the A1Cube interface
+	//that are used to decide which face to rotate.
 	@Override
 	public void front(int k) {
-		// 
+		/*
 		Square temp1;
 		Square temp2;
 		Square temp3;
@@ -100,8 +107,10 @@ public class Cube implements A1Cube
 		Faces[1].getSquares()[0][1] = temp2;
 		Faces[1].getSquares()[1][1] = temp1;
 		}
+		*/
 	}
-
+	//all the methods below are used to rotate the cube. each method corresponding
+	//to one of the six faces of the cube. 
 	@Override
 	public void back(int k) {
 		// TODO Auto-generated method stub
@@ -131,7 +140,7 @@ public class Cube implements A1Cube
 		// TODO Auto-generated method stub
 		
 	}
-
+	//this method is used to test the cube is solved or not. 
 	@Override
 	public boolean isSolved() {
 		//checks if the cube has been solved, returns true if it has been
@@ -153,7 +162,7 @@ public class Cube implements A1Cube
 		
 		return solved;
 	}
-
+	//this method will rotate the cube randomly 
 	@Override
 	public void randomize(int k) {
 		// TODO Auto-generated method stub
@@ -176,11 +185,10 @@ public class Cube implements A1Cube
 		}
 		isSolved = isSolved();
 	}
-
+	//this will set the cube back to solved state
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
-		isSolved = true;
 		Faces[0].setFaceUp(Faces[1]);
 		Faces[0].setFaceRight(Faces[2]);
 		Faces[0].setFaceDown(Faces[4]);
@@ -210,6 +218,7 @@ public class Cube implements A1Cube
 		Faces[5].setFaceRight(Faces[0]);
 		Faces[5].setFaceDown(Faces[4]);
 		Faces[5].setFaceLeft(Faces[3]);
+		isSolved = true; //indicate the cube is in solved state
 	}
 	
 }
