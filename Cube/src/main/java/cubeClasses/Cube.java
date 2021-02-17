@@ -8,6 +8,7 @@ public class Cube implements A1Cube
 	Face[] Faces; //keep all six faces of the cube 
 	boolean isSolved;// flag that is used to keep track of if the cube is in solved state. 
 	
+	//Constructor: creates a solved cube with six faces, each of a unique color
 	public Cube()
 	{
 		isSolved = true;//the cube is solved when it is just created. 
@@ -19,102 +20,58 @@ public class Cube implements A1Cube
 		Faces[3]=new Face("black");
 		Faces[4]=new Face("white");
 		Faces[5]=new Face("orange");
-
-		
-		//sets the adjacent face values for the first face
-		Faces[0].setFaceUp(Faces[1]);
-		Faces[0].setFaceRight(Faces[2]);
-		Faces[0].setFaceDown(Faces[4]);
-		Faces[0].setFaceLeft(Faces[5]);
-		//second face
-		Faces[1].setFaceUp(Faces[3]);
-		Faces[1].setFaceRight(Faces[2]);
-		Faces[1].setFaceDown(Faces[0]);
-		Faces[1].setFaceLeft(Faces[5]);
-		//third face
-		Faces[2].setFaceUp(Faces[1]);	
-		Faces[2].setFaceRight(Faces[3]);
-		Faces[2].setFaceDown(Faces[4]);
-		Faces[2].setFaceLeft(Faces[0]);
-		//fourth face
-		Faces[3].setFaceUp(Faces[1]);
-		Faces[3].setFaceRight(Faces[5]);
-		Faces[3].setFaceDown(Faces[4]); 	
-		Faces[3].setFaceLeft(Faces[2]);
-		//fifth face
-		Faces[4].setFaceUp(Faces[0]);
-		Faces[4].setFaceRight(Faces[2]);
-		Faces[4].setFaceDown(Faces[3]);
-		Faces[4].setFaceLeft(Faces[5]);
-		//sixth face
-		Faces[5].setFaceUp(Faces[1]);
-		Faces[5].setFaceRight(Faces[0]);
-		Faces[5].setFaceDown(Faces[4]);
-		Faces[5].setFaceLeft(Faces[3]);
 	}
 	
-	//return an exact same cube as the current one 
+	//clone: returns a deep copy of the current cube
 	public A1Cube clone() 
 	{
 		return null;		
 	}
-	//this will be used to traverse the whole cube when clone a new one.
-	public void traverse()
-	{
-		
-	}
-	//all of the six methods below are inherited from the A1Cube interface
-	//that are used to decide which face to rotate.
+	
+	/*front, back, right, left, up, down: Rotates the side as designated by the name clockwise
+	 * k = the amount of times to rotate
+	 */
 	@Override
 	public void front(int k) {
-		/*
+
 		Square temp1;
 		Square temp2;
 		Square temp3;
 		Square temp4;
-		
+		k = k % 4;
 		for(int x = 0; x<k; x++)
 		{
+		//rotates the face itself
 		temp1 = Faces[0].getSquares()[0][0];
 		Faces[0].getSquares()[0][0]=Faces[0].getSquares()[0][1];
-		
 		temp2 = Faces[0].getSquares()[1][0];
 		Faces[0].getSquares()[1][0] = temp1;
-		
 		temp1 = Faces[0].getSquares()[1][1];
 		Faces[0].getSquares()[1][1] = temp2;
-		
 		Faces[0].getSquares()[0][1] = temp1;
 		
+		//rotates face 1 into face 2 and stores face 2's replaced values
 		temp1 = Faces[2].getSquares()[0][0];
 		temp2 = Faces[2].getSquares()[0][1];
-			
 		Faces[2].getSquares()[0][0] = Faces[1].getSquares()[0][1];
 		Faces[2].getSquares()[0][1] = Faces[1].getSquares()[1][1];
-			
+		
+		//rotates face 2 into face 4 and stores face 4's replaced values
 		temp3 = Faces[4].getSquares()[0][0];
 		temp4 = Faces[4].getSquares()[1][0];
-			
 		Faces[4].getSquares()[1][0] = temp1;
 		Faces[4].getSquares()[0][0] = temp2;
 			
+		//rotates face 4 into face 5 and stores face 5's replaced values
 		temp1 = Faces[5].getSquares()[1][0];
-		temp2 = Faces[5].getSquares()[1][1];
-			
+		temp2 = Faces[5].getSquares()[1][1];	
 		Faces[5].getSquares()[1][0] = temp3;
 		Faces[5].getSquares()[1][1] = temp4;
-			
+		
+		//rotates face 5 into face one
 		Faces[1].getSquares()[0][1] = temp2;
 		Faces[1].getSquares()[1][1] = temp1;
 		}
-		*/
-	}
-	//all the methods below are used to rotate the cube. each method corresponding
-	//to one of the six faces of the cube. 
-	@Override
-	public void back(int k) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -140,11 +97,13 @@ public class Cube implements A1Cube
 		// TODO Auto-generated method stub
 		
 	}
-	//this method is used to test the cube is solved or not. 
+	
+	/*isSolved: checks if the cube has been solved, returns true if it has been, false otherwise
+	 *solved in this case means that all sides are only single colored, not that all Faces[0].getSquares() are in their original places
+	 */
 	@Override
 	public boolean isSolved() {
-		//checks if the cube has been solved, returns true if it has been
-		//solved in this case means that all sides are only single colored, not that all Faces[0].getSquares() are in their original places
+
 		boolean solved=true;
 		Square[][] current;
 		for(int side=0;side<6;side++)
@@ -162,63 +121,58 @@ public class Cube implements A1Cube
 		
 		return solved;
 	}
-	//this method will rotate the cube randomly 
+	/*randomize: Turns faces randomly in order to create a randomly shuffled cube
+	 * int k = the amount of turns that will be made
+	 */
 	@Override
 	public void randomize(int k) {
-		// TODO Auto-generated method stub
-		//does a set of random operations on the cube so that it becomes shuffled while still being solvable, as it was made with moves the manipulator can replicate
 		Random gen = new Random();
-		int selection = 0;
-		int current;
+		int currentFace;
+		int amountOfTurns;
 		for (int x = 0; x<k; x++)
 		{
-			current = gen.nextInt(5);
-			selection = gen.nextInt(1);
-			if(selection == 0)
+			amountOfTurns = gen.nextInt(2)+1;
+			currentFace = gen.nextInt(5);
+			if(currentFace == 0)
 			{
-				Faces[current].clockwise();
+				front(amountOfTurns);
 			}
-			else if(selection ==1)
+			else if(currentFace == 1)
 			{
-				Faces[current].counterclockwise();
+				up(amountOfTurns);
+			}
+			else if(currentFace == 2)
+			{
+				right(amountOfTurns);
+			}
+			else if(currentFace == 3)
+			{
+				back(amountOfTurns);
+			}
+			else if(currentFace == 4)
+			{
+				down(amountOfTurns);
+			}
+			else if(currentFace == 5)
+			{
+				left(amountOfTurns);
 			}
 		}
 		isSolved = isSolved();
 	}
-	//this will set the cube back to solved state
-	@Override
+	/*reset: sets the cube back to the base state
+	 */
 	public void reset() {
-		// TODO Auto-generated method stub
-		Faces[0].setFaceUp(Faces[1]);
-		Faces[0].setFaceRight(Faces[2]);
-		Faces[0].setFaceDown(Faces[4]);
-		Faces[0].setFaceLeft(Faces[5]);
+		isSolved = true;//the cube is solved when it is has been reset.
 		
-		Faces[1].setFaceUp(Faces[3]);
-		Faces[1].setFaceRight(Faces[2]);
-		Faces[1].setFaceDown(Faces[0]);
-		Faces[1].setFaceLeft(Faces[5]);
-		
-		Faces[2].setFaceUp(Faces[1]);	
-		Faces[2].setFaceRight(Faces[3]);
-		Faces[2].setFaceDown(Faces[4]);
-		Faces[2].setFaceLeft(Faces[0]);
-		
-		Faces[3].setFaceUp(Faces[1]);
-		Faces[3].setFaceRight(Faces[5]);
-		Faces[3].setFaceDown(Faces[4]); 	
-		Faces[3].setFaceLeft(Faces[2]);
-		
-		Faces[4].setFaceUp(Faces[0]);
-		Faces[4].setFaceRight(Faces[2]);
-		Faces[4].setFaceDown(Faces[3]);
-		Faces[4].setFaceLeft(Faces[5]);
-		
-		Faces[5].setFaceUp(Faces[1]);
-		Faces[5].setFaceRight(Faces[0]);
-		Faces[5].setFaceDown(Faces[4]);
-		Faces[5].setFaceLeft(Faces[3]);
-		isSolved = true; //indicate the cube is in solved state
+		// add all the faces to the cube along with the color of each face. 
+		Faces[0]=new Face("red");
+		Faces[1]=new Face("yellow");
+		Faces[2]=new Face("green");
+		Faces[3]=new Face("black");
+		Faces[4]=new Face("white");
+		Faces[5]=new Face("orange");
+
 	}
 	
 }

@@ -10,8 +10,11 @@ public class Square
 	 * @param color
 	 * @param order
 	 */
-	//constructor, default position is (0,0). Every time a square is created, the 
-	//position should be reset. 
+
+	/*Square: The constructor
+	 * color: A string representing the color
+	 * order: An int representing where the square is on the face
+	 */
 	public Square(String color, int order)
 	{
 		super();
@@ -46,8 +49,10 @@ public class Square
 	{
 		return yPos;
 	}
-	/////
-	//this is used to compare two squares, and see if their colors are the same
+	
+	/*equals: returns true if two squares are the same, false otherwise, overrides the object.equals method
+	 * other: the square that the current one is being compared to
+	 */
 	public boolean equals(Square other)
 	{
 		if(this.getColor().equals(other.getColor()))
