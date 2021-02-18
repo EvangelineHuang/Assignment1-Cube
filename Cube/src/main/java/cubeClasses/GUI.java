@@ -51,7 +51,7 @@ public class GUI extends JFrame{
 	          }});
 		//create up button
 		//create down button
-		// create left button
+		//create left button
 		//create right button
 		//there will be two extra buttons called clockwise and counterclockwise
 		//which will be visible after one of the six side buttons is clicked. 
@@ -62,6 +62,7 @@ public class GUI extends JFrame{
 		setVisible(true);
 	}
 	//this is the method that is used to paint the cube, it is inherited from JFrame
+	//g: object of JFrame used to draw the square
 	public void paint(Graphics g)
 	{
 		//this method will go through all the squares of a cube use the color attribute 
@@ -84,12 +85,13 @@ public class GUI extends JFrame{
 	}
 	//this is the update, every time a button is clicked, the GUI will be updated using 
 	//this method. it is inherited from JFrame, it is the same as paint();
+	//g: object of JFrame used to draw the square
 	public void update(Graphics g) 
 	{
 		super.update(g);
 	}
 	@SuppressWarnings("unused")
-	//main function that will run start setting up the GUI
+	//main function that will run to start setting up the GUI
 	public static void main(String[] args) 
 	{
 		GUI drawCube=new GUI();

@@ -17,11 +17,12 @@ public class Face
 	}
 	
 	//getSquares: returns an array of squares
+	//square; the current array of squares of the face
 	public Square[][] getSquares()
 	{
 		return squares;
 	}
-	/*setSquares: replaces the side with a preexisting array of squares, may not be used
+	/*setSquares: replaces the side with a pre-existing array of squares, may not be used
 	 * squares: an array of squares
 	 */
 	public void setSquares(Square[][] squares) {

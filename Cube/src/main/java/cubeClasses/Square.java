@@ -24,27 +24,33 @@ public class Square
 		yPos = 0;
 	}
 	////getters and setters, for the completeness of the class. most of them may not be used
+	//color: the current color of the square
 	public String getColor()
 	{
 		return color;
 	}
+	//color: the color that we want to set the square to
 	public void setColor(String color)
 	{
 		this.color = color;
 	}
 	//setX and setY will be used when the cube is rotated and the position of the cube is changed
+	//x: x position we want to move the square to 
 	public void setX(int x)
 	{
 		xPos = x;
 	}
+	//y: y position we want to move the square to 
 	public void setY(int y)
 	{
 		yPos = y;
 	}
+	//xPos: current x position of the square
 	public int getxPos() 
 	{
 		return xPos;
 	}
+	//yPos: current y position of the square
 	public int getyPos() 
 	{
 		return yPos;

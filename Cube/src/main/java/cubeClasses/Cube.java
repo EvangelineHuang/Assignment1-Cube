@@ -98,8 +98,17 @@ public class Cube implements A1Cube
 		
 	}
 	
+	@Override
+	public void back(int k) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/*isSolved: checks if the cube has been solved, returns true if it has been, false otherwise
 	 *solved in this case means that all sides are only single colored, not that all Faces[0].getSquares() are in their original places
+	 */
+	/*
+	 solved: boolean to indicate if the cube is solved.
 	 */
 	@Override
 	public boolean isSolved() {
