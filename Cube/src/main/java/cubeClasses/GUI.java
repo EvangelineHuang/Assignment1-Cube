@@ -15,7 +15,9 @@ public class GUI extends JFrame{
 
 	static Color color = Color.red;// This is just used for test. 
 	A1Cube cube = new Cube();//The cube that will be painted 
-	//button listener will be 
+	//button listener will be added in the next turn in
+	/*GUI: the constructor, creates the cube as well as the buttons necessary to manipulate it
+	 */
 	public GUI()
 	{
 		//to set title
@@ -52,7 +54,7 @@ public class GUI extends JFrame{
 		// create left button
 		//create right button
 		//there will be two extra buttons called clockwise and counterclockwise
-		//which will be visible after one of the six buttons is clicked. 
+		//which will be visible after one of the six side buttons is clicked. 
 		//set size
 		setSize(500,500);
 
