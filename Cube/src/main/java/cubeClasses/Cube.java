@@ -5,7 +5,7 @@ import java.util.Random;
 public class Cube implements A1Cube
 {
 	//red=0, yellow=1, green=2, black=3, white = 4, orange = 5
-	Face[] Faces; //keep all six faces of the cube 
+	Face[] Faces = new Face[6]; //keep all six faces of the cube 
 	boolean isSolved;// flag that is used to keep track of if the cube is in solved state. 
 	
 	//Constructor: creates a solved cube with six faces, each of a unique color
@@ -14,12 +14,67 @@ public class Cube implements A1Cube
 		isSolved = true;//the cube is solved when it is just created. 
 		
 		// add all the faces to the cube along with the color of each face. 
-		Faces[0]=new Face("red");
-		Faces[1]=new Face("yellow");
-		Faces[2]=new Face("green");
-		Faces[3]=new Face("black");
-		Faces[4]=new Face("white");
-		Faces[5]=new Face("orange");
+		Faces[0]=new Face("#84A59D");
+		Faces[1]=new Face("#98C1D9");
+		Faces[2]=new Face("#E5989B");
+		Faces[3]=new Face("#fff3b0");
+		Faces[4]=new Face("#BCB8B1");
+		Faces[5]=new Face("#DDA15E");
+		//set positions for the first face;
+		Faces[0].getSquares()[0][0].setX(200);
+		Faces[0].getSquares()[0][0].setY(200);
+		Faces[0].getSquares()[1][1].setX(232);
+		Faces[0].getSquares()[1][1].setY(232);
+		Faces[0].getSquares()[0][1].setX(232);
+		Faces[0].getSquares()[0][1].setY(200);
+		Faces[0].getSquares()[1][0].setX(200);
+		Faces[0].getSquares()[1][0].setY(232);
+		//set positions for the second face
+		Faces[1].getSquares()[0][0].setX(200);
+		Faces[1].getSquares()[0][0].setY(136);
+		Faces[1].getSquares()[1][1].setX(232);
+		Faces[1].getSquares()[1][1].setY(168);
+		Faces[1].getSquares()[0][1].setX(232);
+		Faces[1].getSquares()[0][1].setY(136);
+		Faces[1].getSquares()[1][0].setX(200);
+		Faces[1].getSquares()[1][0].setY(168);
+		//set positions for the third face
+		Faces[2].getSquares()[0][0].setX(200);
+		Faces[2].getSquares()[0][0].setY(264);
+		Faces[2].getSquares()[1][1].setX(232);
+		Faces[2].getSquares()[1][1].setY(296);
+		Faces[2].getSquares()[0][1].setX(232);
+		Faces[2].getSquares()[0][1].setY(264);
+		Faces[2].getSquares()[1][0].setX(200);
+		Faces[2].getSquares()[1][0].setY(296);
+		//set positions for the fourth face
+		Faces[3].getSquares()[0][0].setX(136);
+		Faces[3].getSquares()[0][0].setY(200);
+		Faces[3].getSquares()[1][1].setX(168);
+		Faces[3].getSquares()[1][1].setY(232);
+		Faces[3].getSquares()[0][1].setX(168);
+		Faces[3].getSquares()[0][1].setY(200);
+		Faces[3].getSquares()[1][0].setX(136);
+		Faces[3].getSquares()[1][0].setY(232);
+		//set positions for the fifth face
+		Faces[4].getSquares()[0][0].setX(264);
+		Faces[4].getSquares()[0][0].setY(200);
+		Faces[4].getSquares()[1][1].setX(296);
+		Faces[4].getSquares()[1][1].setY(232);
+		Faces[4].getSquares()[0][1].setX(296);
+		Faces[4].getSquares()[0][1].setY(200);
+		Faces[4].getSquares()[1][0].setX(264);
+		Faces[4].getSquares()[1][0].setY(232);
+		//set positions for the sixth face
+		Faces[5].getSquares()[0][0].setX(328);
+		Faces[5].getSquares()[0][0].setY(200);
+		Faces[5].getSquares()[1][1].setX(360);
+		Faces[5].getSquares()[1][1].setY(232);
+		Faces[5].getSquares()[0][1].setX(360);
+		Faces[5].getSquares()[0][1].setY(200);
+		Faces[5].getSquares()[1][0].setX(328);
+		Faces[5].getSquares()[1][0].setY(232);
+		
 	}
 	
 	//clone: returns a deep copy of the current cube

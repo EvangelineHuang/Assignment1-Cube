@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class GUI extends JFrame{
 
 	static Color color = Color.red;// This is just used for test. 
-	A1Cube cube = new Cube();//The cube that will be painted 
+	Cube cube = new Cube();//The cube that will be painted 
 	//button listener will be added in the next turn in
 	/*GUI: the constructor, creates the cube as well as the buttons necessary to manipulate it
 	 */
@@ -45,7 +45,7 @@ public class GUI extends JFrame{
 		forward.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	  //panel.removeAll();
-	        	  color = Color.green;
+	        	  color = Color.decode("#FF5733");
 	        	  repaint();
 	        	  //addButton();
 	          }});
@@ -68,19 +68,22 @@ public class GUI extends JFrame{
 		//this method will go through all the squares of a cube use the color attribute 
 		//and xPos, yPos attribute to draw squares. 
 		super.paint(g);
-
-		//draw rectangle outline
-		g.drawRect(200,200,30,30);
-
-		//set color to Green
-		g.setColor(color);
-
-		//fill rectangle with color
-		g.fillRect(200,200,30,30);
-		g.drawRect(230,230,30,30);
-		g.fillRect(230,230,30,30);
-		g.drawRect(230,200,30,30);
-		g.fillRect(230,200,30,30);
+		for(int i = 0; i<6;i++)
+		{	
+			
+			Face f =cube.Faces[i];
+			g.setColor(Color.BLACK);
+			g.drawRect(f.getSquares()[0][0].getxPos(), f.getSquares()[0][0].getyPos(), 30, 30);
+			g.drawRect(f.getSquares()[1][1].getxPos(), f.getSquares()[1][1].getyPos(), 30, 30);
+			g.drawRect(f.getSquares()[0][1].getxPos(), f.getSquares()[0][1].getyPos(), 30, 30);
+			g.drawRect(f.getSquares()[1][0].getxPos(), f.getSquares()[1][0].getyPos(), 30, 30);
+			g.setColor(Color.decode(f.getSquares()[0][0].getColor()));
+			g.fillRect(f.getSquares()[0][0].getxPos(), f.getSquares()[0][0].getyPos(), 30, 30);
+			g.fillRect(f.getSquares()[1][1].getxPos(), f.getSquares()[1][1].getyPos(), 30, 30);
+			g.fillRect(f.getSquares()[0][1].getxPos(), f.getSquares()[0][1].getyPos(), 30, 30);
+			g.fillRect(f.getSquares()[1][0].getxPos(), f.getSquares()[1][0].getyPos(), 30, 30);
+			
+		}
 	    
 	}
 	//this is the update, every time a button is clicked, the GUI will be updated using 

@@ -17,7 +17,7 @@ public class Square
 	 */
 	public Square(String color, int order)
 	{
-		super();
+		//System.out.println("sss");
 		this.color = color;
 		this.order = order;
 		xPos = 0;
