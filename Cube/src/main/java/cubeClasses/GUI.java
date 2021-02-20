@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 //This is the GUI of the Cube. Every time a button get clicked on, the unfolded 
 //cube will display how a real cube is rotated.
 //When the cube is rotated, all the squares will be repainted.
@@ -15,6 +17,9 @@ public class GUI extends JFrame{
 
 	static Color color = Color.red;// This is just used for test. 
 	Cube cube = new Cube();//The cube that will be painted 
+	Face current;
+	int k = 1;
+	Boolean dir = true;
 	//button listener will be added in the next turn in
 	/*GUI: the constructor, creates the cube as well as the buttons necessary to manipulate it
 	 */
@@ -26,6 +31,23 @@ public class GUI extends JFrame{
 		//set close button operation
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().add(p);
+		JButton cw = new JButton();
+		JButton ccw = new JButton();
+		cw.setText("Clockwise");
+		p.add(cw);
+		cw.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	  dir = true;
+	          }});
+		
+		ccw.setText("Counterclockwise");
+		p.add(ccw);
+		ccw.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	  dir = false;
+	          }});
+		JTextField field = new JTextField(5);
+		p.add(field);
 		//create back button for rotating
 		JButton back = new JButton();
 		back.setText("Back");		
@@ -33,27 +55,109 @@ public class GUI extends JFrame{
 		//button action listener, will repaint the cube
 		back.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	  //panel.removeAll();
-	        	  color = Color.green;
-	        	  repaint();
-	        	  //addButton();
+	        	 current = cube.getFaces()[5];
+	        	 current.setDirection(dir);
+	        	  try
+	        	  {
+	        		  k = Integer.parseInt(field.getText());
+	        	  }
+	        	  catch(NumberFormatException exception)
+	        	  {
+	        		  k = 1;
+	        	  }
+	        	 repaint();
 	          }});
 		//create forward button
-		JButton forward = new JButton();
-		forward.setText("Forward");		
-		p.add(forward);
-		forward.addActionListener(new ActionListener() {
+		JButton front = new JButton();
+		front.setText("Front");		
+		p.add(front);
+		front.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	  //panel.removeAll();
-	        	  color = Color.decode("#FF5733");
-	        	  repaint();
-	        	  //addButton();
+	        	 current = cube.getFaces()[0]; 
+	        	 current.setDirection(dir);
+	        	  try
+	        	  {
+	        		  k = Integer.parseInt(field.getText());
+	        	  }
+	        	  catch(NumberFormatException exception)
+	        	  {
+	        		  k = 1;
+	        	  }
+	        	 repaint();
 	          }});
 		//create up button
+		JButton up = new JButton();
+		up.setText("Up");		
+		p.add(up);
+		up.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	 current = cube.getFaces()[1]; 
+	        	 current.setDirection(dir);
+	        	  try
+	        	  {
+	        		  k = Integer.parseInt(field.getText());
+	        	  }
+	        	  catch(NumberFormatException exception)
+	        	  {
+	        		  k = 1;
+	        	  }
+	        	 repaint();
+	          }});
 		//create down button
+		JButton down = new JButton();
+		down.setText("Down");		
+		p.add(down);
+		down.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	 current = cube.getFaces()[2];
+	        	 current.setDirection(dir);
+	        	  try
+	        	  {
+	        		  k = Integer.parseInt(field.getText());
+	        	  }
+	        	  catch(NumberFormatException exception)
+	        	  {
+	        		  k = 1;
+	        	  }
+	        	 repaint();
+	          }});
 		//create left button
+		JButton left = new JButton();
+		left.setText("Feft");		
+		p.add(left);
+		left.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	 current = cube.getFaces()[3];
+	        	 current.setDirection(dir);
+	        	  try
+	        	  {
+	        		  k = Integer.parseInt(field.getText());
+	        	  }
+	        	  catch(NumberFormatException exception)
+	        	  {
+	        		  k = 1;
+	        	  }
+	        	 repaint();
+	          }});
 		//create right button
-		//there will be two extra buttons called clockwise and counterclockwise
+		JButton right = new JButton();
+		right.setText("Right");		
+		p.add(right);
+		right.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	 current = cube.getFaces()[4]; 
+	        	 current.setDirection(dir);
+	        	  try
+	        	  {
+	        		  k = Integer.parseInt(field.getText());
+	        	  }
+	        	  catch(NumberFormatException exception)
+	        	  {
+	        		  k = 1;
+	        	  }
+	        	 repaint();
+	          }});
+
 		//which will be visible after one of the six side buttons is clicked. 
 		//set size
 		setSize(500,500);

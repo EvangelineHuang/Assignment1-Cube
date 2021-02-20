@@ -17,7 +17,7 @@ public class Cube implements A1Cube
 		Faces[0]=new Face("#84A59D");
 		Faces[1]=new Face("#98C1D9");
 		Faces[2]=new Face("#E5989B");
-		Faces[3]=new Face("#fff3b0");
+		Faces[3]=new Face("#FFF3B0");
 		Faces[4]=new Face("#BCB8B1");
 		Faces[5]=new Face("#DDA15E");
 		//set positions for the first face;
@@ -74,9 +74,43 @@ public class Cube implements A1Cube
 		Faces[5].getSquares()[0][1].setY(200);
 		Faces[5].getSquares()[1][0].setX(328);
 		Faces[5].getSquares()[1][0].setY(232);
+		//sets the adjacent face values for the first face	
+		Faces[0].setFaceUp(Faces[1]);	
+		Faces[0].setFaceRight(Faces[4]);	
+		Faces[0].setFaceDown(Faces[2]);	
+		Faces[0].setFaceLeft(Faces[3]);	
+		//second face	
+		Faces[1].setFaceUp(Faces[5]);	
+		Faces[1].setFaceRight(Faces[4]);	
+		Faces[1].setFaceDown(Faces[0]);	
+		Faces[1].setFaceLeft(Faces[3]);	
+		//third face	
+		Faces[2].setFaceUp(Faces[1]);		
+		Faces[2].setFaceRight(Faces[4]);	
+		Faces[2].setFaceDown(Faces[5]);	
+		Faces[2].setFaceLeft(Faces[3]);	
+		//fourth face	
+		Faces[3].setFaceUp(Faces[1]);	
+		Faces[3].setFaceRight(Faces[0]);	
+		Faces[3].setFaceDown(Faces[2]); 		
+		Faces[3].setFaceLeft(Faces[5]);	
+		//fifth face	
+		Faces[4].setFaceUp(Faces[1]);	
+		Faces[4].setFaceRight(Faces[5]);	
+		Faces[4].setFaceDown(Faces[2]);	
+		Faces[4].setFaceLeft(Faces[0]);	
+		//sixth face	
+		Faces[5].setFaceUp(Faces[1]);	
+		Faces[5].setFaceRight(Faces[3]);	
+		Faces[5].setFaceDown(Faces[2]);	
+		Faces[5].setFaceLeft(Faces[4]);
 		
 	}
 	
+	public Face[] getFaces() {
+		return Faces;
+	}
+
 	//clone: returns a deep copy of the current cube
 	public A1Cube clone() 
 	{
