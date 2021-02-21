@@ -1,6 +1,7 @@
 package cubeClasses;
 public class Square 
 {
+
 	String color;//color will be displayed on GUI
 	int order;//valid values are 1,2,3,4 corresponding to positions on the Face
 	//these two attributes are used to decide will to draw the square on GUI
@@ -67,4 +68,10 @@ public class Square
 		}
 		return false;
 	}
+	
+	public String String() 
+	{
+		return "Square [color=" + color + ", order=" + order + ", xPos=" + xPos + ", yPos=" + yPos + "]";
+	}
+
 }

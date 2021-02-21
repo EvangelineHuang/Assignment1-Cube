@@ -56,7 +56,7 @@ public class GUI extends JFrame{
 		back.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 current = cube.getFaces()[5];
-	        	 current.setDirection(dir);
+	        	 
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -74,7 +74,7 @@ public class GUI extends JFrame{
 		front.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 current = cube.getFaces()[0]; 
-	        	 current.setDirection(dir);
+	        	 
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -91,8 +91,13 @@ public class GUI extends JFrame{
 		p.add(up);
 		up.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 current = cube.getFaces()[1]; 
-	        	 current.setDirection(dir);
+	        	 cube.up(1);
+	        	 System.out.println(cube.getFaces()[0]);
+	        	 /*System.out.println(cube.getFaces()[1]);
+	        	 System.out.println(cube.getFaces()[2]);
+	        	 System.out.println(cube.getFaces()[3]);
+	        	 System.out.println(cube.getFaces()[4]);
+	        	 System.out.println(cube.getFaces()[5]);*/
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -110,7 +115,8 @@ public class GUI extends JFrame{
 		down.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 current = cube.getFaces()[2];
-	        	 current.setDirection(dir);
+	        	 cube.down(1);
+
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -128,7 +134,7 @@ public class GUI extends JFrame{
 		left.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 current = cube.getFaces()[3];
-	        	 current.setDirection(dir);
+	        	 
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -146,7 +152,7 @@ public class GUI extends JFrame{
 		right.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 current = cube.getFaces()[4]; 
-	        	 current.setDirection(dir);
+	        	
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -174,17 +180,20 @@ public class GUI extends JFrame{
 		super.paint(g);
 		for(int i = 0; i<6;i++)
 		{	
-			
 			Face f =cube.Faces[i];
 			g.setColor(Color.BLACK);
+			
 			g.drawRect(f.getSquares()[0][0].getxPos(), f.getSquares()[0][0].getyPos(), 30, 30);
 			g.drawRect(f.getSquares()[1][1].getxPos(), f.getSquares()[1][1].getyPos(), 30, 30);
 			g.drawRect(f.getSquares()[0][1].getxPos(), f.getSquares()[0][1].getyPos(), 30, 30);
 			g.drawRect(f.getSquares()[1][0].getxPos(), f.getSquares()[1][0].getyPos(), 30, 30);
 			g.setColor(Color.decode(f.getSquares()[0][0].getColor()));
 			g.fillRect(f.getSquares()[0][0].getxPos(), f.getSquares()[0][0].getyPos(), 30, 30);
+			g.setColor(Color.decode(f.getSquares()[1][1].getColor()));
 			g.fillRect(f.getSquares()[1][1].getxPos(), f.getSquares()[1][1].getyPos(), 30, 30);
+			g.setColor(Color.decode(f.getSquares()[0][1].getColor()));
 			g.fillRect(f.getSquares()[0][1].getxPos(), f.getSquares()[0][1].getyPos(), 30, 30);
+			g.setColor(Color.decode(f.getSquares()[1][0].getColor()));
 			g.fillRect(f.getSquares()[1][0].getxPos(), f.getSquares()[1][0].getyPos(), 30, 30);
 			
 		}

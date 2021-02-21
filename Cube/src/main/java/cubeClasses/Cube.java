@@ -1,10 +1,11 @@
 package cubeClasses;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Cube implements A1Cube
 {
-	//red=0, yellow=1, green=2, black=3, white = 4, orange = 5
+	//green=0, blue=1, grey=2, red=3, yellow=4, orange=5
 	Face[] Faces = new Face[6]; //keep all six faces of the cube 
 	boolean isSolved;// flag that is used to keep track of if the cube is in solved state. 
 	
@@ -75,6 +76,7 @@ public class Cube implements A1Cube
 		Faces[5].getSquares()[1][0].setX(328);
 		Faces[5].getSquares()[1][0].setY(232);
 		//sets the adjacent face values for the first face	
+		/*
 		Faces[0].setFaceUp(Faces[1]);	
 		Faces[0].setFaceRight(Faces[4]);	
 		Faces[0].setFaceDown(Faces[2]);	
@@ -104,6 +106,7 @@ public class Cube implements A1Cube
 		Faces[5].setFaceRight(Faces[3]);	
 		Faces[5].setFaceDown(Faces[2]);	
 		Faces[5].setFaceLeft(Faces[4]);
+		*/
 		
 	}
 	
@@ -177,19 +180,123 @@ public class Cube implements A1Cube
 
 	@Override
 	public void up(int k) {
-		// TODO Auto-generated method stub
-		
+
+		for (int i = 0; i<k;i++ )
+		{
+			Square temp1 = Faces[0].getSquares()[0][0];
+			Square temp2 = Faces[0].getSquares()[0][1];
+			int tempx1 = temp1.getxPos();
+			int tempx2 = temp2.getxPos();
+			int tempy1 = temp1.getyPos();
+			int tempy2 = temp2.getyPos();
+			Faces[0].getSquares()[0][0].setX(Faces[3].getSquares()[0][0].getxPos());
+			Faces[0].getSquares()[0][1].setX(Faces[3].getSquares()[0][1].getxPos());
+			Faces[0].getSquares()[0][0].setY(Faces[3].getSquares()[0][0].getyPos());
+			Faces[0].getSquares()[0][1].setY(Faces[3].getSquares()[0][1].getyPos());
+	
+			Faces[3].getSquares()[0][0].setX(Faces[5].getSquares()[0][0].getxPos());
+			Faces[3].getSquares()[0][1].setX(Faces[5].getSquares()[0][1].getxPos());
+			Faces[3].getSquares()[0][0].setY(Faces[5].getSquares()[0][0].getyPos());
+			Faces[3].getSquares()[0][1].setY(Faces[5].getSquares()[0][1].getyPos());
+			
+			Faces[5].getSquares()[0][0].setX(Faces[4].getSquares()[0][0].getxPos());
+			Faces[5].getSquares()[0][1].setX(Faces[4].getSquares()[0][1].getxPos());
+			Faces[5].getSquares()[0][0].setY(Faces[4].getSquares()[0][0].getyPos());
+			Faces[5].getSquares()[0][1].setY(Faces[4].getSquares()[0][1].getyPos());
+			
+			Faces[4].getSquares()[0][0].setX(tempx1);
+			Faces[4].getSquares()[0][1].setX(tempx2);
+			Faces[4].getSquares()[0][0].setY(tempy1);
+			Faces[4].getSquares()[0][1].setY(tempy2);
+			
+		}
 	}
 
 	@Override
 	public void down(int k) {
-		// TODO Auto-generated method stub
 		
+		for (int i = 0; i<k;i++ )
+		{
+			Square temp1 = Faces[0].getSquares()[1][0];
+			Square temp2 = Faces[0].getSquares()[1][1];
+			int tempx1 = temp1.getxPos();
+			int tempx2 = temp2.getxPos();
+			int tempy1 = temp1.getyPos();
+			int tempy2 = temp2.getyPos();
+
+			Faces[0].getSquares()[1][0].setX(Faces[4].getSquares()[1][0].getxPos());
+			Faces[0].getSquares()[1][1].setX(Faces[4].getSquares()[1][1].getxPos());
+			Faces[0].getSquares()[1][0].setY(Faces[4].getSquares()[1][0].getyPos());
+			Faces[0].getSquares()[1][1].setY(Faces[4].getSquares()[1][1].getyPos());
+			
+
+			Faces[4].getSquares()[1][0].setX(Faces[5].getSquares()[1][0].getxPos());
+			Faces[4].getSquares()[1][1].setX(Faces[5].getSquares()[1][1].getxPos());
+			Faces[4].getSquares()[1][0].setY(Faces[5].getSquares()[1][0].getyPos());
+			Faces[4].getSquares()[1][1].setY(Faces[5].getSquares()[1][1].getyPos());
+
+
+			Faces[5].getSquares()[1][0].setX(Faces[3].getSquares()[1][0].getxPos());
+			Faces[5].getSquares()[1][1].setX(Faces[3].getSquares()[1][1].getxPos());
+			Faces[5].getSquares()[1][0].setY(Faces[3].getSquares()[1][0].getyPos());
+			Faces[5].getSquares()[1][1].setY(Faces[3].getSquares()[1][1].getyPos());
+
+			
+
+			Faces[3].getSquares()[1][0].setX(tempx1);
+			Faces[3].getSquares()[1][1].setX(tempx2);
+			Faces[3].getSquares()[1][0].setY(tempy1);
+			Faces[3].getSquares()[1][1].setY(tempy2);
+
+			Faces[0].getSquares()[1][0] = Faces[3].getSquares()[1][0];
+			Faces[0].getSquares()[1][1] = Faces[3].getSquares()[1][1];
+			Faces[3].getSquares()[1][0] = Faces[5].getSquares()[1][0];
+			Faces[3].getSquares()[1][1] = Faces[5].getSquares()[1][1];
+			Faces[5].getSquares()[1][0] = Faces[4].getSquares()[1][0];
+			Faces[5].getSquares()[1][1] = Faces[4].getSquares()[1][1];
+			Faces[4].getSquares()[1][0] = temp1;
+			Faces[4].getSquares()[1][1] = temp2;
+       	 System.out.println(Faces[0]);
+       	 System.out.println(Faces[1]);
+       	 System.out.println(Faces[2]);
+       	 System.out.println(Faces[3]);
+       	 System.out.println(Faces[4]);
+       	 System.out.println(Faces[5]);
+		}
 	}
 	
 	@Override
 	public void back(int k) {
-		// TODO Auto-generated method stub
+		
+		for (int i = 0; i<k;i++ )
+		{
+			Square temp1 = Faces[0].getSquares()[0][0];
+			Square temp2 = Faces[0].getSquares()[0][1];
+			int tempx1 = temp1.getxPos();
+			int tempx2 = temp2.getxPos();
+			int tempy1 = temp1.getyPos();
+			int tempy2 = temp2.getyPos();
+			Faces[0].getSquares()[0][0].setX(Faces[3].getSquares()[0][0].getxPos());
+			Faces[0].getSquares()[0][1].setX(Faces[3].getSquares()[0][1].getxPos());
+			Faces[0].getSquares()[0][0].setY(Faces[3].getSquares()[0][0].getyPos());
+			Faces[0].getSquares()[0][1].setY(Faces[3].getSquares()[0][1].getyPos());
+			
+			Faces[3].getSquares()[0][0].setX(Faces[5].getSquares()[0][0].getxPos());
+			Faces[3].getSquares()[0][1].setX(Faces[5].getSquares()[0][1].getxPos());
+			Faces[3].getSquares()[0][0].setY(Faces[5].getSquares()[0][0].getyPos());
+			Faces[3].getSquares()[0][1].setY(Faces[5].getSquares()[0][1].getyPos());
+			
+			Faces[5].getSquares()[0][0].setX(Faces[4].getSquares()[0][0].getxPos());
+			Faces[5].getSquares()[0][1].setX(Faces[4].getSquares()[0][1].getxPos());
+			Faces[5].getSquares()[0][0].setY(Faces[4].getSquares()[0][0].getyPos());
+			Faces[5].getSquares()[0][1].setY(Faces[4].getSquares()[0][1].getyPos());
+			
+			Faces[4].getSquares()[0][0].setX(tempx1);
+			Faces[4].getSquares()[0][1].setX(tempx2);
+			Faces[4].getSquares()[0][0].setY(tempy1);
+			Faces[4].getSquares()[0][1].setY(tempy2);
+			
+		}
 		
 	}
 	
@@ -264,13 +371,18 @@ public class Cube implements A1Cube
 		isSolved = true;//the cube is solved when it is has been reset.
 		
 		// add all the faces to the cube along with the color of each face. 
-		Faces[0]=new Face("red");
-		Faces[1]=new Face("yellow");
-		Faces[2]=new Face("green");
-		Faces[3]=new Face("black");
-		Faces[4]=new Face("white");
-		Faces[5]=new Face("orange");
+		Faces[0]=new Face("#84A59D");
+		Faces[1]=new Face("#98C1D9");
+		Faces[2]=new Face("#E5989B");
+		Faces[3]=new Face("#FFF3B0");
+		Faces[4]=new Face("#BCB8B1");
+		Faces[5]=new Face("#DDA15E");
 
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Cube [Faces=" + Arrays.toString(Faces) + ", isSolved=" + isSolved + "]";
+	}
+
 }
