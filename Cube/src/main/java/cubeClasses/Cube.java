@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Cube implements A1Cube
 {
-	//green=0, blue=1, grey=2, red=3, yellow=4, orange=5
+	//green=0, blue=1, red=2, yellow=3, grey=4, orange=5
 	Face[] Faces = new Face[6]; //keep all six faces of the cube 
 	boolean isSolved;// flag that is used to keep track of if the cube is in solved state. 
 	
@@ -125,62 +125,208 @@ public class Cube implements A1Cube
 	 */
 	@Override
 	public void front(int k) {
-
-		Square temp1;
-		Square temp2;
-		Square temp3;
-		Square temp4;
-		k = k % 4;
-		for(int x = 0; x<k; x++)
+		k=k%4;
+		for(int x=0; x<k;x++)
 		{
-		//rotates the face itself
-		temp1 = Faces[0].getSquares()[0][0];
-		Faces[0].getSquares()[0][0]=Faces[0].getSquares()[0][1];
-		temp2 = Faces[0].getSquares()[1][0];
-		Faces[0].getSquares()[1][0] = temp1;
-		temp1 = Faces[0].getSquares()[1][1];
-		Faces[0].getSquares()[1][1] = temp2;
-		Faces[0].getSquares()[0][1] = temp1;
+		Square temp1 = Faces[1].getSquares()[1][0];
+		Square temp2 = Faces[1].getSquares()[1][1];
+		int tempx1 = temp1.getxPos();
+		int tempx2 = temp2.getxPos();
+		int tempy1 = temp1.getyPos();
+		int tempy2 = temp2.getyPos();
+		Faces[1].getSquares()[1][0].setX(Faces[4].getSquares()[0][0].getxPos());
+		Faces[1].getSquares()[1][1].setX(Faces[4].getSquares()[1][0].getxPos());
+		Faces[1].getSquares()[1][0].setY(Faces[4].getSquares()[0][0].getyPos());
+		Faces[1].getSquares()[1][1].setY(Faces[4].getSquares()[1][0].getyPos());
+
+		Faces[4].getSquares()[0][0].setX(Faces[2].getSquares()[0][1].getxPos());
+		Faces[4].getSquares()[1][0].setX(Faces[2].getSquares()[0][0].getxPos());
+		Faces[4].getSquares()[0][0].setY(Faces[2].getSquares()[0][1].getyPos());
+		Faces[4].getSquares()[1][0].setY(Faces[2].getSquares()[0][0].getyPos());
 		
-		//rotates face 1 into face 2 and stores face 2's replaced values
-		temp1 = Faces[2].getSquares()[0][0];
-		temp2 = Faces[2].getSquares()[0][1];
-		Faces[2].getSquares()[0][0] = Faces[1].getSquares()[0][1];
-		Faces[2].getSquares()[0][1] = Faces[1].getSquares()[1][1];
+		Faces[2].getSquares()[0][0].setX(Faces[3].getSquares()[0][1].getxPos());
+		Faces[2].getSquares()[0][1].setX(Faces[3].getSquares()[1][1].getxPos());
+		Faces[2].getSquares()[0][0].setY(Faces[3].getSquares()[0][1].getyPos());
+		Faces[2].getSquares()[0][1].setY(Faces[3].getSquares()[1][1].getyPos());
 		
-		//rotates face 2 into face 4 and stores face 4's replaced values
-		temp3 = Faces[4].getSquares()[0][0];
-		temp4 = Faces[4].getSquares()[1][0];
-		Faces[4].getSquares()[1][0] = temp1;
-		Faces[4].getSquares()[0][0] = temp2;
-			
-		//rotates face 4 into face 5 and stores face 5's replaced values
-		temp1 = Faces[5].getSquares()[1][0];
-		temp2 = Faces[5].getSquares()[1][1];	
-		Faces[5].getSquares()[1][0] = temp3;
-		Faces[5].getSquares()[1][1] = temp4;
+		Faces[3].getSquares()[1][1].setX(tempx1);
+		Faces[3].getSquares()[0][1].setX(tempx2);
+		Faces[3].getSquares()[1][1].setY(tempy1);
+		Faces[3].getSquares()[0][1].setY(tempy2);
+	
+		Faces[1].getSquares()[1][1] = Faces[3].getSquares()[0][1];
+		Faces[1].getSquares()[1][0] = Faces[3].getSquares()[1][1];
+		Faces[3].getSquares()[0][1] = Faces[2].getSquares()[0][0];
+		Faces[3].getSquares()[1][1] = Faces[2].getSquares()[0][1];
+		Faces[2].getSquares()[0][1] = Faces[4].getSquares()[0][0];
+		Faces[2].getSquares()[0][0] = Faces[4].getSquares()[1][0];
+		Faces[4].getSquares()[0][0] = temp1;
+		Faces[4].getSquares()[1][0] = temp2;
 		
-		//rotates face 5 into face one
-		Faces[1].getSquares()[0][1] = temp2;
-		Faces[1].getSquares()[1][1] = temp1;
+		//rotates the current face
+		temp1=Faces[0].getSquares()[0][0];
+		tempx1=temp1.getxPos();
+		tempy1=temp1.getyPos();
+		
+		Square[][] currentSquares=Faces[0].getSquares();
+		currentSquares[0][0].setX(currentSquares[0][1].getxPos());
+		currentSquares[0][0].setY(currentSquares[0][1].getyPos());
+		
+		currentSquares[0][1].setX(currentSquares[1][1].getxPos());
+		currentSquares[0][1].setY(currentSquares[1][1].getyPos());
+		
+		currentSquares[1][1].setX(currentSquares[1][0].getxPos());
+		currentSquares[1][1].setY(currentSquares[1][0].getyPos());
+		
+		currentSquares[1][0].setX(tempx1);
+		currentSquares[1][0].setY(tempy1);
+		
+		currentSquares[0][0]=currentSquares[1][0];
+		currentSquares[1][0]=currentSquares[1][1];
+		currentSquares[1][1]=currentSquares[0][1];
+		currentSquares[0][1]=temp1;
+		
 		}
 	}
 
 	@Override
 	public void left(int k) {
-		// TODO Auto-generated method stub
+		k=k%4;
+		for(int x=0; x<k;x++)
+		{
+		Square temp1 = Faces[1].getSquares()[0][0];
+		Square temp2 = Faces[1].getSquares()[1][0];
+		int tempx1 = temp1.getxPos();
+		int tempx2 = temp2.getxPos();
+		int tempy1 = temp1.getyPos();
+		int tempy2 = temp2.getyPos();
+		Faces[1].getSquares()[0][0].setX(Faces[0].getSquares()[0][0].getxPos());
+		Faces[1].getSquares()[1][0].setX(Faces[0].getSquares()[1][0].getxPos());
+		Faces[1].getSquares()[0][0].setY(Faces[0].getSquares()[0][0].getyPos());
+		Faces[1].getSquares()[1][0].setY(Faces[0].getSquares()[1][0].getyPos());
+
+		Faces[0].getSquares()[0][0].setX(Faces[2].getSquares()[0][0].getxPos());
+		Faces[0].getSquares()[1][0].setX(Faces[2].getSquares()[1][0].getxPos());
+		Faces[0].getSquares()[0][0].setY(Faces[2].getSquares()[0][0].getyPos());
+		Faces[0].getSquares()[1][0].setY(Faces[2].getSquares()[1][0].getyPos());
+		
+		Faces[2].getSquares()[0][0].setX(Faces[5].getSquares()[1][1].getxPos());
+		Faces[2].getSquares()[1][0].setX(Faces[5].getSquares()[0][1].getxPos());
+		Faces[2].getSquares()[0][0].setY(Faces[5].getSquares()[1][1].getyPos());
+		Faces[2].getSquares()[1][0].setY(Faces[5].getSquares()[0][1].getyPos());
+		
+		Faces[5].getSquares()[1][1].setX(tempx1);
+		Faces[5].getSquares()[0][1].setX(tempx2);
+		Faces[5].getSquares()[1][1].setY(tempy1);
+		Faces[5].getSquares()[0][1].setY(tempy2);
+	
+		Faces[1].getSquares()[0][0] = Faces[5].getSquares()[1][1];
+		Faces[1].getSquares()[1][0] = Faces[5].getSquares()[0][1];
+		Faces[5].getSquares()[0][1] = Faces[2].getSquares()[1][0];
+		Faces[5].getSquares()[1][1] = Faces[2].getSquares()[0][0];
+		Faces[2].getSquares()[1][0] = Faces[0].getSquares()[1][0];
+		Faces[2].getSquares()[0][0] = Faces[0].getSquares()[0][0];
+		Faces[0].getSquares()[0][0] = temp1;
+		Faces[0].getSquares()[1][0] = temp2;
+		
+		//rotates the current face
+		temp1=Faces[3].getSquares()[0][0];
+		tempx1=temp1.getxPos();
+		tempy1=temp1.getyPos();
+		
+		Square[][] currentSquares=Faces[3].getSquares();
+		currentSquares[0][0].setX(currentSquares[0][1].getxPos());
+		currentSquares[0][0].setY(currentSquares[0][1].getyPos());
+		
+		currentSquares[0][1].setX(currentSquares[1][1].getxPos());
+		currentSquares[0][1].setY(currentSquares[1][1].getyPos());
+		
+		currentSquares[1][1].setX(currentSquares[1][0].getxPos());
+		currentSquares[1][1].setY(currentSquares[1][0].getyPos());
+		
+		currentSquares[1][0].setX(tempx1);
+		currentSquares[1][0].setY(tempy1);
+		
+		currentSquares[0][0]=currentSquares[1][0];
+		currentSquares[1][0]=currentSquares[1][1];
+		currentSquares[1][1]=currentSquares[0][1];
+		currentSquares[0][1]=temp1;
+		
+		}
 		
 	}
 
 	@Override
 	public void right(int k) {
-		// TODO Auto-generated method stub
+		k=k%4;
+		for(int x=0; x<k;x++)
+		{
+		Square temp1 = Faces[1].getSquares()[0][1];
+		Square temp2 = Faces[1].getSquares()[1][1];
+		int tempx1 = temp1.getxPos();
+		int tempx2 = temp2.getxPos();
+		int tempy1 = temp1.getyPos();
+		int tempy2 = temp2.getyPos();
+		Faces[1].getSquares()[1][1].setX(Faces[5].getSquares()[0][0].getxPos());
+		Faces[1].getSquares()[0][1].setX(Faces[5].getSquares()[1][0].getxPos());
+		Faces[1].getSquares()[1][1].setY(Faces[5].getSquares()[0][0].getyPos());
+		Faces[1].getSquares()[0][1].setY(Faces[5].getSquares()[1][0].getyPos());
+
+		Faces[5].getSquares()[0][0].setX(Faces[2].getSquares()[1][1].getxPos());
+		Faces[5].getSquares()[1][0].setX(Faces[2].getSquares()[0][1].getxPos());
+		Faces[5].getSquares()[0][0].setY(Faces[2].getSquares()[1][1].getyPos());
+		Faces[5].getSquares()[1][0].setY(Faces[2].getSquares()[0][1].getyPos());
+		
+		Faces[2].getSquares()[0][1].setX(Faces[0].getSquares()[0][1].getxPos());
+		Faces[2].getSquares()[1][1].setX(Faces[0].getSquares()[1][1].getxPos());
+		Faces[2].getSquares()[0][1].setY(Faces[0].getSquares()[0][1].getyPos());
+		Faces[2].getSquares()[1][1].setY(Faces[0].getSquares()[1][1].getyPos());
+		
+		Faces[0].getSquares()[0][1].setX(tempx1);
+		Faces[0].getSquares()[1][1].setX(tempx2);
+		Faces[0].getSquares()[0][1].setY(tempy1);
+		Faces[0].getSquares()[1][1].setY(tempy2);
+	
+		Faces[1].getSquares()[0][1] = Faces[0].getSquares()[0][1];
+		Faces[1].getSquares()[1][1] = Faces[0].getSquares()[1][1];
+		Faces[0].getSquares()[0][1] = Faces[2].getSquares()[0][1];
+		Faces[0].getSquares()[1][1] = Faces[2].getSquares()[1][1];
+		Faces[2].getSquares()[0][1] = Faces[5].getSquares()[1][0];
+		Faces[2].getSquares()[1][1] = Faces[5].getSquares()[0][0];
+		Faces[5].getSquares()[1][0] = temp1;
+		Faces[5].getSquares()[0][0] = temp2;
+		
+		//rotates the current face
+		temp1=Faces[4].getSquares()[0][0];
+		tempx1=temp1.getxPos();
+		tempy1=temp1.getyPos();
+		
+		Square[][] currentSquares=Faces[4].getSquares();
+		currentSquares[0][0].setX(currentSquares[0][1].getxPos());
+		currentSquares[0][0].setY(currentSquares[0][1].getyPos());
+		
+		currentSquares[0][1].setX(currentSquares[1][1].getxPos());
+		currentSquares[0][1].setY(currentSquares[1][1].getyPos());
+		
+		currentSquares[1][1].setX(currentSquares[1][0].getxPos());
+		currentSquares[1][1].setY(currentSquares[1][0].getyPos());
+		
+		currentSquares[1][0].setX(tempx1);
+		currentSquares[1][0].setY(tempy1);
+		
+		currentSquares[0][0]=currentSquares[1][0];
+		currentSquares[1][0]=currentSquares[1][1];
+		currentSquares[1][1]=currentSquares[0][1];
+		currentSquares[0][1]=temp1;
+		
+		}
 		
 	}
 
 	@Override
 	public void up(int k) {
-
+		
+		k=k%4;
 		for (int i = 0; i<k;i++ )
 		{
 			Square temp1 = Faces[0].getSquares()[0][0];
@@ -218,12 +364,34 @@ public class Cube implements A1Cube
 			Faces[3].getSquares()[0][0] = temp1;
 			Faces[3].getSquares()[0][1] = temp2;
 			
+			//rotates the current face
+			temp1=Faces[1].getSquares()[0][0];
+			tempx1=temp1.getxPos();
+			tempy1=temp1.getyPos();
+			
+			Square[][] currentSquares=Faces[1].getSquares();
+			currentSquares[0][0].setX(currentSquares[0][1].getxPos());
+			currentSquares[0][0].setY(currentSquares[0][1].getyPos());
+			
+			currentSquares[0][1].setX(currentSquares[1][1].getxPos());
+			currentSquares[0][1].setY(currentSquares[1][1].getyPos());
+			
+			currentSquares[1][1].setX(currentSquares[1][0].getxPos());
+			currentSquares[1][1].setY(currentSquares[1][0].getyPos());
+			
+			currentSquares[1][0].setX(tempx1);
+			currentSquares[1][0].setY(tempy1);
+			
+			currentSquares[0][0]=currentSquares[1][0];
+			currentSquares[1][0]=currentSquares[1][1];
+			currentSquares[1][1]=currentSquares[0][1];
+			currentSquares[0][1]=temp1;
 		}
 	}
 
 	@Override
 	public void down(int k) {
-		
+		k=k%4;
 		for (int i = 0; i<k;i++ )
 		{
 			Square temp1 = Faces[0].getSquares()[1][0];
@@ -264,12 +432,35 @@ public class Cube implements A1Cube
 			Faces[5].getSquares()[1][1] = Faces[4].getSquares()[1][1];
 			Faces[4].getSquares()[1][0] = temp1;
 			Faces[4].getSquares()[1][1] = temp2;
+			
+			//rotates the current face
+			temp1=Faces[2].getSquares()[0][0];
+			tempx1=temp1.getxPos();
+			tempy1=temp1.getyPos();
+			
+			Square[][] currentSquares=Faces[2].getSquares();
+			currentSquares[0][0].setX(currentSquares[0][1].getxPos());
+			currentSquares[0][0].setY(currentSquares[0][1].getyPos());
+			
+			currentSquares[0][1].setX(currentSquares[1][1].getxPos());
+			currentSquares[0][1].setY(currentSquares[1][1].getyPos());
+			
+			currentSquares[1][1].setX(currentSquares[1][0].getxPos());
+			currentSquares[1][1].setY(currentSquares[1][0].getyPos());
+			
+			currentSquares[1][0].setX(tempx1);
+			currentSquares[1][0].setY(tempy1);
+			
+			currentSquares[0][0]=currentSquares[1][0];
+			currentSquares[1][0]=currentSquares[1][1];
+			currentSquares[1][1]=currentSquares[0][1];
+			currentSquares[0][1]=temp1;
 		}
 	}
 	
 	@Override
 	public void back(int k) {
-		
+		k=k%4;
 		for (int i = 0; i<k;i++ )
 		{
 			Square temp1 = Faces[1].getSquares()[0][0];
@@ -306,6 +497,29 @@ public class Cube implements A1Cube
 			Faces[2].getSquares()[1][0] = Faces[3].getSquares()[0][0];
 			Faces[3].getSquares()[1][0] = temp1;
 			Faces[3].getSquares()[0][0] = temp2;
+			
+			//rotates the current face
+			temp1=Faces[5].getSquares()[0][0];
+			tempx1=temp1.getxPos();
+			tempy1=temp1.getyPos();
+			
+			Square[][] currentSquares=Faces[5].getSquares();
+			currentSquares[0][0].setX(currentSquares[0][1].getxPos());
+			currentSquares[0][0].setY(currentSquares[0][1].getyPos());
+			
+			currentSquares[0][1].setX(currentSquares[1][1].getxPos());
+			currentSquares[0][1].setY(currentSquares[1][1].getyPos());
+			
+			currentSquares[1][1].setX(currentSquares[1][0].getxPos());
+			currentSquares[1][1].setY(currentSquares[1][0].getyPos());
+			
+			currentSquares[1][0].setX(tempx1);
+			currentSquares[1][0].setY(tempy1);
+			
+			currentSquares[0][0]=currentSquares[1][0];
+			currentSquares[1][0]=currentSquares[1][1];
+			currentSquares[1][1]=currentSquares[0][1];
+			currentSquares[0][1]=temp1;
 		}
 		
 	}
