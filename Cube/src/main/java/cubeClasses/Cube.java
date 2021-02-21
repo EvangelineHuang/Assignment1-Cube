@@ -208,6 +208,15 @@ public class Cube implements A1Cube
 			Faces[4].getSquares()[0][1].setX(tempx2);
 			Faces[4].getSquares()[0][0].setY(tempy1);
 			Faces[4].getSquares()[0][1].setY(tempy2);
+		
+			Faces[0].getSquares()[0][0] = Faces[4].getSquares()[0][0];
+			Faces[0].getSquares()[0][1] = Faces[4].getSquares()[0][1];
+			Faces[4].getSquares()[0][0] = Faces[5].getSquares()[0][0];
+			Faces[4].getSquares()[0][1] = Faces[5].getSquares()[0][1];
+			Faces[5].getSquares()[0][0] = Faces[3].getSquares()[0][0];
+			Faces[5].getSquares()[0][1] = Faces[3].getSquares()[0][1];
+			Faces[3].getSquares()[0][0] = temp1;
+			Faces[3].getSquares()[0][1] = temp2;
 			
 		}
 	}
@@ -241,8 +250,7 @@ public class Cube implements A1Cube
 			Faces[5].getSquares()[1][0].setY(Faces[3].getSquares()[1][0].getyPos());
 			Faces[5].getSquares()[1][1].setY(Faces[3].getSquares()[1][1].getyPos());
 
-			
-
+		
 			Faces[3].getSquares()[1][0].setX(tempx1);
 			Faces[3].getSquares()[1][1].setX(tempx2);
 			Faces[3].getSquares()[1][0].setY(tempy1);
@@ -256,12 +264,6 @@ public class Cube implements A1Cube
 			Faces[5].getSquares()[1][1] = Faces[4].getSquares()[1][1];
 			Faces[4].getSquares()[1][0] = temp1;
 			Faces[4].getSquares()[1][1] = temp2;
-       	 System.out.println(Faces[0]);
-       	 System.out.println(Faces[1]);
-       	 System.out.println(Faces[2]);
-       	 System.out.println(Faces[3]);
-       	 System.out.println(Faces[4]);
-       	 System.out.println(Faces[5]);
 		}
 	}
 	
@@ -270,32 +272,40 @@ public class Cube implements A1Cube
 		
 		for (int i = 0; i<k;i++ )
 		{
-			Square temp1 = Faces[0].getSquares()[0][0];
-			Square temp2 = Faces[0].getSquares()[0][1];
+			Square temp1 = Faces[1].getSquares()[0][0];
+			Square temp2 = Faces[1].getSquares()[0][1];
 			int tempx1 = temp1.getxPos();
 			int tempx2 = temp2.getxPos();
 			int tempy1 = temp1.getyPos();
 			int tempy2 = temp2.getyPos();
-			Faces[0].getSquares()[0][0].setX(Faces[3].getSquares()[0][0].getxPos());
-			Faces[0].getSquares()[0][1].setX(Faces[3].getSquares()[0][1].getxPos());
-			Faces[0].getSquares()[0][0].setY(Faces[3].getSquares()[0][0].getyPos());
-			Faces[0].getSquares()[0][1].setY(Faces[3].getSquares()[0][1].getyPos());
+			Faces[1].getSquares()[0][0].setX(Faces[3].getSquares()[1][0].getxPos());
+			Faces[1].getSquares()[0][1].setX(Faces[3].getSquares()[0][0].getxPos());
+			Faces[1].getSquares()[0][0].setY(Faces[3].getSquares()[1][0].getyPos());
+			Faces[1].getSquares()[0][1].setY(Faces[3].getSquares()[0][0].getyPos());
 			
-			Faces[3].getSquares()[0][0].setX(Faces[5].getSquares()[0][0].getxPos());
-			Faces[3].getSquares()[0][1].setX(Faces[5].getSquares()[0][1].getxPos());
-			Faces[3].getSquares()[0][0].setY(Faces[5].getSquares()[0][0].getyPos());
-			Faces[3].getSquares()[0][1].setY(Faces[5].getSquares()[0][1].getyPos());
+			Faces[3].getSquares()[1][0].setX(Faces[2].getSquares()[1][1].getxPos());
+			Faces[3].getSquares()[0][0].setX(Faces[2].getSquares()[1][0].getxPos());
+			Faces[3].getSquares()[1][0].setY(Faces[2].getSquares()[1][1].getyPos());
+			Faces[3].getSquares()[0][0].setY(Faces[2].getSquares()[1][0].getyPos());
 			
-			Faces[5].getSquares()[0][0].setX(Faces[4].getSquares()[0][0].getxPos());
-			Faces[5].getSquares()[0][1].setX(Faces[4].getSquares()[0][1].getxPos());
-			Faces[5].getSquares()[0][0].setY(Faces[4].getSquares()[0][0].getyPos());
-			Faces[5].getSquares()[0][1].setY(Faces[4].getSquares()[0][1].getyPos());
+			Faces[2].getSquares()[1][1].setX(Faces[4].getSquares()[0][1].getxPos());
+			Faces[2].getSquares()[1][0].setX(Faces[4].getSquares()[1][1].getxPos());
+			Faces[2].getSquares()[1][1].setY(Faces[4].getSquares()[0][1].getyPos());
+			Faces[2].getSquares()[1][0].setY(Faces[4].getSquares()[1][1].getyPos());
 			
-			Faces[4].getSquares()[0][0].setX(tempx1);
-			Faces[4].getSquares()[0][1].setX(tempx2);
-			Faces[4].getSquares()[0][0].setY(tempy1);
-			Faces[4].getSquares()[0][1].setY(tempy2);
+			Faces[4].getSquares()[0][1].setX(tempx1);
+			Faces[4].getSquares()[1][1].setX(tempx2);
+			Faces[4].getSquares()[0][1].setY(tempy1);
+			Faces[4].getSquares()[1][1].setY(tempy2);
 			
+			Faces[1].getSquares()[0][0] = Faces[4].getSquares()[0][1];
+			Faces[1].getSquares()[0][1] = Faces[4].getSquares()[1][1];
+			Faces[4].getSquares()[0][1] = Faces[2].getSquares()[1][1];
+			Faces[4].getSquares()[1][1] = Faces[2].getSquares()[1][0];
+			Faces[2].getSquares()[1][1] = Faces[3].getSquares()[1][0];
+			Faces[2].getSquares()[1][0] = Faces[3].getSquares()[0][0];
+			Faces[3].getSquares()[1][0] = temp1;
+			Faces[3].getSquares()[0][0] = temp2;
 		}
 		
 	}
@@ -377,6 +387,60 @@ public class Cube implements A1Cube
 		Faces[3]=new Face("#FFF3B0");
 		Faces[4]=new Face("#BCB8B1");
 		Faces[5]=new Face("#DDA15E");
+		//set positions for the first face;
+		Faces[0].getSquares()[0][0].setX(200);
+		Faces[0].getSquares()[0][0].setY(200);
+		Faces[0].getSquares()[1][1].setX(232);
+		Faces[0].getSquares()[1][1].setY(232);
+		Faces[0].getSquares()[0][1].setX(232);
+		Faces[0].getSquares()[0][1].setY(200);
+		Faces[0].getSquares()[1][0].setX(200);
+		Faces[0].getSquares()[1][0].setY(232);
+		//set positions for the second face
+		Faces[1].getSquares()[0][0].setX(200);
+		Faces[1].getSquares()[0][0].setY(136);
+		Faces[1].getSquares()[1][1].setX(232);
+		Faces[1].getSquares()[1][1].setY(168);
+		Faces[1].getSquares()[0][1].setX(232);
+		Faces[1].getSquares()[0][1].setY(136);
+		Faces[1].getSquares()[1][0].setX(200);
+		Faces[1].getSquares()[1][0].setY(168);
+		//set positions for the third face
+		Faces[2].getSquares()[0][0].setX(200);
+		Faces[2].getSquares()[0][0].setY(264);
+		Faces[2].getSquares()[1][1].setX(232);
+		Faces[2].getSquares()[1][1].setY(296);
+		Faces[2].getSquares()[0][1].setX(232);
+		Faces[2].getSquares()[0][1].setY(264);
+		Faces[2].getSquares()[1][0].setX(200);
+		Faces[2].getSquares()[1][0].setY(296);
+		//set positions for the fourth face
+		Faces[3].getSquares()[0][0].setX(136);
+		Faces[3].getSquares()[0][0].setY(200);
+		Faces[3].getSquares()[1][1].setX(168);
+		Faces[3].getSquares()[1][1].setY(232);
+		Faces[3].getSquares()[0][1].setX(168);
+		Faces[3].getSquares()[0][1].setY(200);
+		Faces[3].getSquares()[1][0].setX(136);
+		Faces[3].getSquares()[1][0].setY(232);
+		//set positions for the fifth face
+		Faces[4].getSquares()[0][0].setX(264);
+		Faces[4].getSquares()[0][0].setY(200);
+		Faces[4].getSquares()[1][1].setX(296);
+		Faces[4].getSquares()[1][1].setY(232);
+		Faces[4].getSquares()[0][1].setX(296);
+		Faces[4].getSquares()[0][1].setY(200);
+		Faces[4].getSquares()[1][0].setX(264);
+		Faces[4].getSquares()[1][0].setY(232);
+		//set positions for the sixth face
+		Faces[5].getSquares()[0][0].setX(328);
+		Faces[5].getSquares()[0][0].setY(200);
+		Faces[5].getSquares()[1][1].setX(360);
+		Faces[5].getSquares()[1][1].setY(232);
+		Faces[5].getSquares()[0][1].setX(360);
+		Faces[5].getSquares()[0][1].setY(200);
+		Faces[5].getSquares()[1][0].setX(328);
+		Faces[5].getSquares()[1][0].setY(232);
 
 	}
 

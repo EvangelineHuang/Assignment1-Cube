@@ -14,10 +14,8 @@ import javax.swing.JTextField;
 //When the cube is rotated, all the squares will be repainted.
 @SuppressWarnings("serial")
 public class GUI extends JFrame{
-
-	static Color color = Color.red;// This is just used for test. 
+	
 	Cube cube = new Cube();//The cube that will be painted 
-	Face current;
 	int k = 1;
 	Boolean dir = true;
 	//button listener will be added in the next turn in
@@ -55,8 +53,6 @@ public class GUI extends JFrame{
 		//button action listener, will repaint the cube
 		back.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 current = cube.getFaces()[5];
-	        	 
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -65,7 +61,12 @@ public class GUI extends JFrame{
 	        	  {
 	        		  k = 1;
 	        	  }
-	        	 repaint();
+	        	  if (dir == false)
+	        	  {
+	        		  k = 3*k;
+	        	  }
+	        	  cube.back(k);
+	        	  repaint();
 	          }});
 		//create forward button
 		JButton front = new JButton();
@@ -73,8 +74,6 @@ public class GUI extends JFrame{
 		p.add(front);
 		front.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 current = cube.getFaces()[0]; 
-	        	 
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -83,7 +82,12 @@ public class GUI extends JFrame{
 	        	  {
 	        		  k = 1;
 	        	  }
-	        	 repaint();
+	        	  if (dir == false)
+	        	  {
+	        		  k = 3*k;
+	        	  }
+	        	  cube.front(k);
+	        	  repaint();
 	          }});
 		//create up button
 		JButton up = new JButton();
@@ -91,8 +95,7 @@ public class GUI extends JFrame{
 		p.add(up);
 		up.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 cube.up(1);
-	        	 System.out.println(cube.getFaces()[0]);
+	        	 //System.out.println(cube.getFaces()[0]);
 	        	 /*System.out.println(cube.getFaces()[1]);
 	        	 System.out.println(cube.getFaces()[2]);
 	        	 System.out.println(cube.getFaces()[3]);
@@ -106,7 +109,12 @@ public class GUI extends JFrame{
 	        	  {
 	        		  k = 1;
 	        	  }
-	        	 repaint();
+	        	  if (dir == false)
+	        	  {
+	        		  k = 3*k;
+	        	  }
+	        	  cube.up(k);
+	        	  repaint();
 	          }});
 		//create down button
 		JButton down = new JButton();
@@ -114,9 +122,6 @@ public class GUI extends JFrame{
 		p.add(down);
 		down.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 current = cube.getFaces()[2];
-	        	 cube.down(1);
-
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -125,7 +130,12 @@ public class GUI extends JFrame{
 	        	  {
 	        		  k = 1;
 	        	  }
-	        	 repaint();
+	        	  if (dir == false)
+	        	  {
+	        		  k = 3*k;
+	        	  }
+	        	  cube.down(k);
+	        	  repaint();
 	          }});
 		//create left button
 		JButton left = new JButton();
@@ -133,8 +143,6 @@ public class GUI extends JFrame{
 		p.add(left);
 		left.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 current = cube.getFaces()[3];
-	        	 
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -143,7 +151,12 @@ public class GUI extends JFrame{
 	        	  {
 	        		  k = 1;
 	        	  }
-	        	 repaint();
+	        	  if (dir == false)
+	        	  {
+	        		  k = 3*k;
+	        	  }
+	        	  cube.left(k);
+	        	  repaint();
 	          }});
 		//create right button
 		JButton right = new JButton();
@@ -151,8 +164,6 @@ public class GUI extends JFrame{
 		p.add(right);
 		right.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	 current = cube.getFaces()[4]; 
-	        	
 	        	  try
 	        	  {
 	        		  k = Integer.parseInt(field.getText());
@@ -161,10 +172,43 @@ public class GUI extends JFrame{
 	        	  {
 	        		  k = 1;
 	        	  }
-	        	 repaint();
+	        	  if (dir == false)
+	        	  {
+	        		  k = 3*k;
+	        	  }
+	        	  cube.right(k);
+	        	  repaint();
 	          }});
 
-		//which will be visible after one of the six side buttons is clicked. 
+		
+		JButton ran = new JButton();
+		ran.setText("Randomize");
+		p.add(ran);
+		ran.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	  try
+	        	  {
+	        		  k = Integer.parseInt(field.getText());
+	        	  }
+	        	  catch(NumberFormatException exception)
+	        	  {
+	        		  k = 1;
+	        	  }
+	        	  if (dir == false)
+	        	  {
+	        		  k = 3*k;
+	        	  }
+	        	  cube.randomize(k);
+	        	  repaint();
+	          }});
+		JButton reset= new JButton();
+		reset.setText("Reset");
+		p.add(reset);
+		reset.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	  cube.reset();
+	        	  repaint();
+	          }});
 		//set size
 		setSize(500,500);
 
