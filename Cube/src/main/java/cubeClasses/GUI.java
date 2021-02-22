@@ -263,7 +263,7 @@ public class GUI extends JFrame{
 	    		  {
 	    			  label2.setText("Not Solved");
 	    		  }
-	        	  System.out.println(cube.isSolved());
+	        	  //System.out.println(cube.isSolved());
 	        	  repaint();
 	          }});
 
