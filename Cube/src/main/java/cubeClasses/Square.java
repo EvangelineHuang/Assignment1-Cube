@@ -35,6 +35,12 @@ public class Square
 	{
 		this.color = color;
 	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
+	}
 	//setX and setY will be used when the cube is rotated and the position of the cube is changed
 	//x: x position we want to move the square to 
 	public void setX(int x)

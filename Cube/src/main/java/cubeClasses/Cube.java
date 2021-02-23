@@ -115,9 +115,26 @@ public class Cube implements A1Cube
 	}
 
 	//clone: returns a deep copy of the current cube
-	public A1Cube clone() 
+	public Cube clone() 
 	{
-		return null;		
+		Cube ccube = new Cube();
+		for(int i = 0; i<6; i++)
+		{
+			
+			for (int j = 0; j<2 ; j++)
+			{
+				for(int m= 0; m<2 ; m++)
+				{
+					Square s = new Square("default",0);
+					s.setColor(this.Faces[i].getSquares()[j][m].getColor());
+					s.setX(this.Faces[i].getSquares()[j][m].getxPos());
+					s.setY(this.Faces[i].getSquares()[j][m].getyPos());
+					s.setOrder(this.Faces[i].getSquares()[j][m].getOrder());
+					ccube.Faces[i].getSquares()[j][m] = s;
+				}
+			}
+		}
+		return ccube;
 	}
 	
 	/*front, back, right, left, up, down: Rotates the side as designated by the name clockwise

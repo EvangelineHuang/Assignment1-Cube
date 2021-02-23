@@ -20,7 +20,9 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class GUI extends JFrame{
 	
+	
 	Cube cube = new Cube();//The cube that will be painted 
+	
 	int k = 1;
 	Boolean dir = true;
 	JLabel label2 = new JLabel();
@@ -32,6 +34,13 @@ public class GUI extends JFrame{
 	{
 		//to set title
 		super("Draw a Cube");
+		//Cube n = cube.clone();
+		/*System.out.println(n.getFaces()[0]);
+   	 	System.out.println(n.getFaces()[1]);
+   	 	System.out.println(n.getFaces()[2]);
+   	 	System.out.println(n.getFaces()[3]);
+   	 	System.out.println(n.getFaces()[4]);
+   	 	System.out.println(n.getFaces()[5]);*/
 		JPanel p = new JPanel();
 	    p.setLayout(null);
 		//set close button operation
