@@ -24,7 +24,7 @@ public class Square
 		xPos = 0;
 		yPos = 0;
 	}
-	////getters and setters, for the completeness of the class. most of them may not be used
+	////getters and setters, will be used when clone a cube 
 	//color: the current color of the square
 	public String getColor()
 	{
@@ -35,9 +35,11 @@ public class Square
 	{
 		this.color = color;
 	}
+	//order: the order of the square in the face
 	public int getOrder() {
 		return order;
 	}
+	//order: the order that we want to give the square
 	public void setOrder(int order) {
 		this.order = order;
 	}
@@ -74,7 +76,7 @@ public class Square
 		}
 		return false;
 	}
-	
+	//the same thing as toString()
 	public String String() 
 	{
 		return "Square [color=" + color + ", order=" + order + ", xPos=" + xPos + ", yPos=" + yPos + "]";

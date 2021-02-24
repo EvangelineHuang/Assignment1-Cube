@@ -33,8 +33,7 @@ public class Face
 	public void setSquares(Square[][] squares) {
 		this.squares = squares;
 	}
-	//getters and setters for the completeness of the class. All the setters will be used to 	
-	//set current face's adjacent faces 		
+		
 	@Override
 	public String toString() {
 		String s = "";

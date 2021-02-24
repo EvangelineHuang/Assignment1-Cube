@@ -75,7 +75,7 @@ public class Cube implements A1Cube
 		Faces[5].getSquares()[0][1].setY(200);
 		Faces[5].getSquares()[1][0].setX(328);
 		Faces[5].getSquares()[1][0].setY(232);
-		//sets the adjacent face values for the first face	
+		//below is used for reference
 		/*
 		Faces[0].setFaceUp(Faces[1]);	
 		Faces[0].setFaceRight(Faces[4]);	
@@ -109,13 +109,13 @@ public class Cube implements A1Cube
 		*/
 		
 	}
-	
+	//Faces: the current face array of the cube
 	public Face[] getFaces() {
 		return Faces;
 	}
 
 	//clone: returns a deep copy of the current cube
-	public Cube clone() 
+	public A1Cube clone() 
 	{
 		Cube ccube = new Cube();
 		for(int i = 0; i<6; i++)
@@ -125,12 +125,12 @@ public class Cube implements A1Cube
 			{
 				for(int m= 0; m<2 ; m++)
 				{
-					Square s = new Square("default",0);
-					s.setColor(this.Faces[i].getSquares()[j][m].getColor());
-					s.setX(this.Faces[i].getSquares()[j][m].getxPos());
-					s.setY(this.Faces[i].getSquares()[j][m].getyPos());
-					s.setOrder(this.Faces[i].getSquares()[j][m].getOrder());
-					ccube.Faces[i].getSquares()[j][m] = s;
+					
+					ccube.Faces[i].getSquares()[j][m].setColor(this.Faces[i].getSquares()[j][m].getColor());
+					ccube.Faces[i].getSquares()[j][m].setX(this.Faces[i].getSquares()[j][m].getxPos());
+					ccube.Faces[i].getSquares()[j][m].setY(this.Faces[i].getSquares()[j][m].getyPos());
+					ccube.Faces[i].getSquares()[j][m].setOrder(this.Faces[i].getSquares()[j][m].getOrder());
+		
 				}
 			}
 		}

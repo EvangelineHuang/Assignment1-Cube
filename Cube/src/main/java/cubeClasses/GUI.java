@@ -34,8 +34,8 @@ public class GUI extends JFrame{
 	{
 		//to set title
 		super("Draw a Cube");
-		//Cube n = cube.clone();
-		/*System.out.println(n.getFaces()[0]);
+		/*Cube n = (Cube) cube.clone();
+		System.out.println(n.getFaces()[0]);
    	 	System.out.println(n.getFaces()[1]);
    	 	System.out.println(n.getFaces()[2]);
    	 	System.out.println(n.getFaces()[3]);
@@ -111,6 +111,7 @@ public class GUI extends JFrame{
 	    		  {
 	    			  label2.setText("Not Solved");
 	    		  }
+	      		  field.setText("");
 	        	  repaint();
 	          }});
 		//create forward button
@@ -142,6 +143,7 @@ public class GUI extends JFrame{
 	    		  {
 	    		  	  label2.setText("Not Solved");
 	    		  }
+	      		  field.setText("");
 	        	  repaint();
 	          }});
 		//create up button
@@ -179,6 +181,7 @@ public class GUI extends JFrame{
 	    		  {
 	    			  label2.setText("Not Solved");
 	    		  }
+	      		  field.setText("");
 	        	  repaint();
 	          }});
 		//create down button
@@ -210,6 +213,7 @@ public class GUI extends JFrame{
 	    		  {
 	    			  label2.setText("Not Solved");
 	    		  }
+	      		  field.setText("");
 	        	  repaint();
 	          }});
 		//create left button
@@ -241,6 +245,7 @@ public class GUI extends JFrame{
 	    		  {
 	    			  label2.setText("Not Solved");
 	    		  }
+	      		  field.setText("");
 	        	  repaint();
 	          }});
 		//create right button
@@ -273,6 +278,7 @@ public class GUI extends JFrame{
 	    			  label2.setText("Not Solved");
 	    		  }
 	        	  //System.out.println(cube.isSolved());
+	      		  field.setText("");
 	        	  repaint();
 	          }});
 
@@ -305,6 +311,7 @@ public class GUI extends JFrame{
 	    		  {
 	    			  label2.setText("Not Solved");
 	    		  }
+	      		  field.setText("");
 	        	  repaint();
 	          }});
 		JButton reset= new JButton();
@@ -315,6 +322,8 @@ public class GUI extends JFrame{
 		reset.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	  cube.reset();
+	        	  dir = true;
+	        	  field.setText("");
 	        	  repaint();
 	          }});
 		//set position of buttons
