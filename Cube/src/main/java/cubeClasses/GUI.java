@@ -340,6 +340,7 @@ public class GUI extends JFrame{
 		//this method will go through all the squares of a cube use the color attribute 
 		//and xPos, yPos attribute to draw squares. 
 		super.paint(g);
+		//set the label for isSolved state
 		if(cube.isSolved() == true)
 	    {
      		label2.setText("Solved");
@@ -352,7 +353,7 @@ public class GUI extends JFrame{
 		{	
 			Face f =cube.Faces[i];
 			g.setColor(Color.BLACK);
-			
+			//draw each squares
 			g.drawRect(f.getSquares()[0][0].getxPos(), f.getSquares()[0][0].getyPos(), 30, 30);
 			g.drawRect(f.getSquares()[1][1].getxPos(), f.getSquares()[1][1].getyPos(), 30, 30);
 			g.drawRect(f.getSquares()[0][1].getxPos(), f.getSquares()[0][1].getyPos(), 30, 30);

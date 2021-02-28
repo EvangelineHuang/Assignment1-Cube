@@ -576,9 +576,9 @@ public class Cube implements A1Cube
 	@Override
 	public void randomize(int k) {
 		Random gen = new Random();
-		int currentFace;
-		int amountOfTurns;
-		int randir; 
+		int currentFace;//random Face
+		int amountOfTurns;//random number of rotations
+		int randir; //random direction
 		for (int x = 0; x<k; x++)
 		{
 			randir = gen.nextInt(2);
