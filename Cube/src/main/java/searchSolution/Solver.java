@@ -8,12 +8,16 @@ public class Solver
 	{
 		head = new Node(c, null,"",0);
 	}
-	public void DFS(int depth)
+	public Node DFS(int depth)
+	{
+		return null;
+	}
+	public Node IDA()
+	{
+		return null;
+	}
+	public void setFace(Cube c)
 	{
 		
-	}
-	public void IDA()
-	{
-	
 	}
 }
