@@ -30,13 +30,22 @@ public class Solver
 	{
 		return null;
 	}
-	public void setFace(Cube c)
+
+	public double heuristic(Cube c)
 	{
-		
-	}
-	public double heuristic()
-	{
-		return 0;
+		double h = 0;
+		for(int i = 0; i<6;i++)
+		{
+			for(int j = 0; j<2;j++)
+			{
+				for(int m = 0; m<2;m++)
+				{
+					if(c.getFaces()[i].getSquares()[j][m].getColor() != c.getFaces()[i].getSolColor())
+					h = h+0.125;
+				}
+			}
+		}
+		return h;
 		
 	}
 	public void defineSolColor()
