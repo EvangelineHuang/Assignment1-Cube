@@ -5,7 +5,7 @@ public class Face
 {	
 	//2D array will hold the squares according to their orders.
 	Square[][] squares = new Square[2][2];	
-
+	String solColor;
 
 	//flags that are used to mark which direction the face will be rotated	
 	/* Face: the constructor, sets all squares to the same color
@@ -18,9 +18,18 @@ public class Face
 		squares[1][0] = new Square(color,2);
 		squares[0][1] = new Square(color,3);
 		squares[1][1] = new Square(color,4);
+		solColor = "";
 
 	}
 	
+	public String getSolColor() {
+		return solColor;
+	}
+
+	public void setSolColor(String solColor) {
+		this.solColor = solColor;
+	}
+
 	//getSquares: returns an array of squares
 	//square; the current array of squares of the face
 	public Square[][] getSquares()

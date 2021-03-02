@@ -20,4 +20,13 @@ public class Solver
 	{
 		
 	}
+	public double heuristic()
+	{
+		return 0;
+		
+	}
+	public void defineSolColor()
+	{
+		
+	}
 }
