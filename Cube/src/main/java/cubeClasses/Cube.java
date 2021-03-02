@@ -133,6 +133,7 @@ public class Cube implements A1Cube
 		
 				}
 			}
+			ccube.getFaces()[i].setSolColor(this.getFaces()[i].getSolColor());
 		}
 		return ccube;
 	}

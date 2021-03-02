@@ -218,7 +218,7 @@ public class GUI extends JFrame{
 	          }});
 		//create left button
 		JButton left = new JButton();
-		left.setText("Feft");	
+		left.setText("Left");	
 	    Dimension size9 = left.getPreferredSize();
 	    left.setBounds(440, 260, size9.width, size9.height);
 		p.add(left);
@@ -376,6 +376,14 @@ public class GUI extends JFrame{
 	public void update(Graphics g) 
 	{
 		super.update(g);
+	}
+	public Cube getCube()
+	{
+		return cube;
+	}
+	public void setCube(Cube c)
+	{
+		cube = c;
 	}
 	@SuppressWarnings("unused")
 	//main function that will run to start setting up the GUI
