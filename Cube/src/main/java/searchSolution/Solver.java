@@ -70,57 +70,69 @@ public class Solver
 			fnode = new Node(null,null,"",inc);
 			return fnode;
 		}
-		Node[] children = new Node[6];
-		Cube cl = (Cube)n.getState().clone();
-		cl.left(1);
-		Node left = new Node(cl,n,"left",fn+1+heuristic(cl));
-		Node tl = DFS(left, threshold,left.cost,inc);
-		children[0] = tl;
-		
-		Cube cb = (Cube)n.getState().clone();
-		cb.back(1);
-		Node back = new Node(cb,n,"back",fn+1+heuristic(cb));
-		Node tb =DFS(back, threshold,back.cost,inc);
-		children[1] = tb;
-		
-		Cube cu = (Cube)n.getState().clone();
-		cu.up(1);
-		Node up = new Node(cu,n,"up",fn+1+heuristic(cu));
-		Node tu =DFS(up, threshold,up.cost,inc);
-		children[2] = tu;
-		
-		Cube cd = (Cube)n.getState().clone();
-		cd.down(1);
-		Node down = new Node(cd,n,"down",fn+1+heuristic(cd));
-		Node td =DFS(down, threshold,down.cost,inc);
-		children[3] = td;
-		
-		Cube cr = (Cube)n.getState().clone();
-		cr.right(1);
-		Node right = new Node(cr,n,"right",fn+1+heuristic(cr));
-		Node tr =DFS(right, threshold,right.cost,inc);
-		children[4] = tr;
-		
-		Cube cf = (Cube)n.getState().clone();
-		cf.front(1);
-		Node front = new Node(cf,n,"front",fn+1+heuristic(cf));
-		Node tf =DFS(front, threshold,front.cost,inc);
-		children[5] = tf;
-		
+		ArrayList<Node> children = new ArrayList<Node>();
+		if(n.action != "counterleft")
+		{
+			Cube cl = (Cube)n.getState().clone();
+			cl.left(1);
+			Node left = new Node(cl,n,"left",fn+1+heuristic(cl));
+			Node tl = DFS(left, threshold,left.cost,inc);
+			children.add(tl);
+		}
+		if(n.action != "counterback")
+		{
+			Cube cb = (Cube)n.getState().clone();
+			cb.back(1);
+			Node back = new Node(cb,n,"back",fn+1+heuristic(cb));
+			Node tb =DFS(back, threshold,back.cost,inc);
+			children.add(tb);
+		}
+		if(n.action != "counterup")
+		{
+			Cube cu = (Cube)n.getState().clone();
+			cu.up(1);
+			Node up = new Node(cu,n,"up",fn+1+heuristic(cu));
+			Node tu =DFS(up, threshold,up.cost,inc);
+			children.add(tu);
+		}
+		if(n.action != "up")
+		{
+			Cube ccu = (Cube)n.getState().clone();
+			ccu.up(3);
+			Node ccup = new Node(ccu,n,"counterup",fn+1+heuristic(ccu));
+			Node tcu =DFS(ccup, threshold,ccup.cost,inc);
+			children.add(tcu);
+		}
+		if(n.action != "left")
+		{
+			Cube ccl = (Cube)n.getState().clone();
+			ccl.left(3);
+			Node ccleft = new Node(ccl,n,"counterleft",fn+1+heuristic(ccl));
+			Node tcl =DFS(ccleft, threshold,ccleft.cost,inc);
+			children.add(tcl);
+		}
+		if(n.action != "back")
+		{
+			Cube ccb = (Cube)n.getState().clone();
+			ccb.back(3);
+			Node ccback = new Node(ccb,n,"front",fn+1+heuristic(ccb));
+			Node tcb =DFS(ccback, threshold,ccback.cost,inc);
+			children.add(tcb);
+		}
 		Node mini = new Node(null,null,"",0);
-		for(int i = 0; i<6;i++)
+		for(int i = 0; i<children.size();i++)
 		{
 			//System.out.println(children[i]);
-			if(children[i].state != null && children[i].state.isSolved())
+			if(children.get(i).state != null && children.get(i).state.isSolved())
 			{
-				return children[i];
+				return children.get(i);
 			}
 			//System.out.println(children[i]);
-			if(children[i].state == null && children[i].action == "" && children[i].parent == null)
+			if(children.get(i).state == null && children.get(i).action == "" && children.get(i).parent == null)
 			{
-				if(mini.cost > children[i].cost);
+				if(mini.cost > children.get(i).cost);
 				{
-					mini = children[i];
+					mini = children.get(i);
 				}
 			}
 		}

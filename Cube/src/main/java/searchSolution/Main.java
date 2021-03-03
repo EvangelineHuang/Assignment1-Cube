@@ -7,10 +7,10 @@ public class Main {
 	{
 		GUI drawCube=new GUI();		
 		Cube c = new Cube();
-		c.randomize(10);
+		//c.randomize(10);
 		//drawCube.setCube(c);
-		//c.back(1);
-		//c.down(1);
+		c.back(1);
+		c.down(1);
 		drawCube.setCube(c);
 		Solver s = new Solver(c);
 		//s.defineSolColor();
