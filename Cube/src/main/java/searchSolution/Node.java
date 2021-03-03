@@ -8,26 +8,21 @@ public class Node
 	String action;
 	Node parent;
 	double cost;
-	double thre;
-	public Node(Cube s, Node p, String a, double c, double sh)
+
+	public Node(Cube s, Node p, String a, double c)
 	{
 		state = s;
 		parent = p;
 		action = a;
 		cost = c;
-		thre = sh;
+
 	}
 	@Override
 	public String toString() {
 		return "Node [state=" + state + ", action=" + action + ", parent=" + parent + ", cost=" + cost + ", thre="
-				+ thre + "]";
+				 + "]";
 	}
-	public double getThre() {
-		return thre;
-	}
-	public void setThre(double thre) {
-		this.thre = thre;
-	}
+
 	public Cube getState() {
 		return state;
 	}

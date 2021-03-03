@@ -14,7 +14,7 @@ public class Solver
 	public Solver(Cube c)
 	{
 
-		head = new Node(c, null,"",0, 0);
+		head = new Node(c, null,"", 0);
 	}
 	//Iterative deepening search
 	//Returns a node in which the state is solved, null if it cannot
@@ -24,16 +24,15 @@ public class Solver
 		//double s = heuristic(head.state);
 		defineSolColor();
 		double s = heuristic(head.state);
-		head.thre = s;
 		double min = 0; 
 		//System.out.println(head.thre);
 		
-		Node n = DFS(head, head.thre, head.cost, min);
+		Node n = DFS(head, s, head.cost, min);
 		//System.out.println(n);
-		while(n.state == null && n.action == null && n.parent == null && n.cost == 0)
+		while(n.state == null && n.action == "" && n.parent == null)
 		{
 			//System.out.println(n.action);
-			n = DFS(head, n.thre, head.cost, min);
+			n = DFS(head, n.cost, head.cost, min);
 		}
 		ArrayList<String> solution = new ArrayList<String>();
 		Node current = n;
@@ -41,12 +40,11 @@ public class Solver
 		//System.out.println(n.action);
 		while(current.parent != null)
 		{
-			
-			current = current.parent;
 			solution.add(current.action);
+			current = current.parent;
 			size ++;
 		}
-		for(int i=0; i<size-1;i++)
+		for(int i=size-1; i>=0;i--)
 		{
 			System.out.println(solution.get(i));
 		}
@@ -69,47 +67,47 @@ public class Solver
 			{
 				inc = fn;
 			}
-			fnode = new Node(null,null,null,0,inc);
+			fnode = new Node(null,null,"",inc);
 			return fnode;
 		}
 		Node[] children = new Node[6];
 		Cube cl = (Cube)n.getState().clone();
 		cl.left(1);
-		Node left = new Node(cl,n,"left",fn+1+heuristic(cl), threshold);
-		Node tl = DFS(left, left.thre,left.cost,threshold);
+		Node left = new Node(cl,n,"left",fn+1+heuristic(cl));
+		Node tl = DFS(left, threshold,left.cost,inc);
 		children[0] = tl;
 		
 		Cube cb = (Cube)n.getState().clone();
 		cb.back(1);
-		Node back = new Node(cb,n,"back",fn+1+heuristic(cb),threshold);
-		Node tb =DFS(back, back.thre,back.cost,threshold);
+		Node back = new Node(cb,n,"back",fn+1+heuristic(cb));
+		Node tb =DFS(back, threshold,back.cost,inc);
 		children[1] = tb;
 		
 		Cube cu = (Cube)n.getState().clone();
 		cu.up(1);
-		Node up = new Node(cu,n,"up",fn+1+heuristic(cu),threshold);
-		Node tu =DFS(up, up.thre,up.cost,threshold);
+		Node up = new Node(cu,n,"up",fn+1+heuristic(cu));
+		Node tu =DFS(up, threshold,up.cost,inc);
 		children[2] = tu;
 		
 		Cube cd = (Cube)n.getState().clone();
 		cd.down(1);
-		Node down = new Node(cd,n,"down",fn+1+heuristic(cd),threshold);
-		Node td =DFS(down, down.thre,down.cost,threshold);
+		Node down = new Node(cd,n,"down",fn+1+heuristic(cd));
+		Node td =DFS(down, threshold,down.cost,inc);
 		children[3] = td;
 		
 		Cube cr = (Cube)n.getState().clone();
 		cr.right(1);
-		Node right = new Node(cr,n,"right",fn+1+heuristic(cr),threshold);
-		Node tr =DFS(right, right.thre,right.cost,threshold);
+		Node right = new Node(cr,n,"right",fn+1+heuristic(cr));
+		Node tr =DFS(right, threshold,right.cost,inc);
 		children[4] = tr;
 		
 		Cube cf = (Cube)n.getState().clone();
 		cf.front(1);
-		Node front = new Node(cf,n,"front",fn+1+heuristic(cf),threshold);
-		Node tf =DFS(front, front.thre,front.cost,threshold);
+		Node front = new Node(cf,n,"front",fn+1+heuristic(cf));
+		Node tf =DFS(front, threshold,front.cost,inc);
 		children[5] = tf;
 		
-		Node mini = new Node(null,null,null,0,0);
+		Node mini = new Node(null,null,"",0);
 		for(int i = 0; i<6;i++)
 		{
 			//System.out.println(children[i]);
@@ -118,9 +116,9 @@ public class Solver
 				return children[i];
 			}
 			//System.out.println(children[i]);
-			if(children[i].state == null && children[i].action == null && children[i].parent == null && children[i].cost == 0)
+			if(children[i].state == null && children[i].action == "" && children[i].parent == null)
 			{
-				if(mini.thre > children[i].thre);
+				if(mini.cost > children[i].cost);
 				{
 					mini = children[i];
 				}

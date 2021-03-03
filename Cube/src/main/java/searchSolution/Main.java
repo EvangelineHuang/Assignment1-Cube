@@ -7,15 +7,15 @@ public class Main {
 	{
 		GUI drawCube=new GUI();		
 		Cube c = new Cube();
-		//c.randomize(5);
+		c.randomize(10);
 		//drawCube.setCube(c);
-		c.back(1);
-		c.down(1);
+		//c.back(1);
+		//c.down(1);
 		drawCube.setCube(c);
 		Solver s = new Solver(c);
 		//s.defineSolColor();
 		s.IDA();
-		System.out.println(c.isSolved());
+		//System.out.println(c.isSolved());
 		/*for (int i = 0; i<6;i++)
 		{
 			System.out.println(i);
