@@ -4,11 +4,11 @@ import cubeClasses.*;
 
 public class Node 
 {
-	Cube state;
-	String action;
-	Node parent;
-	double cost;
-
+	Cube state;//current state of the cube
+	String action;//which action that generated the state
+	Node parent;//parent of the node
+	double cost;//f(n) = cost + heuristic
+	
 	public Node(Cube s, Node p, String a, double c)
 	{
 		state = s;
@@ -18,11 +18,13 @@ public class Node
 
 	}
 	@Override
+	//used to print out the node
+	//used for debugging 
 	public String toString() {
 		return "Node [state=" + state + ", action=" + action + ", parent=" + parent + ", cost=" + cost + ", thre="
 				 + "]";
 	}
-
+	//getters and setters. 
 	public Cube getState() {
 		return state;
 	}

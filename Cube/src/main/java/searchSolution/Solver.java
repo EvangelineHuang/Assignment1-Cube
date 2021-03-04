@@ -17,25 +17,32 @@ public class Solver
 		head = new Node(c, null,"", 0);
 	}
 	//Iterative deepening search
-	//Returns a node in which the state is solved, null if it cannot
+	//will not return anything, but will print the solution if there is one. 
 	public void IDA()
 	{
 		//defineSolColor();
 		//double s = heuristic(head.state);
+		//define the color of each face in order to minimize f(n)
 		defineSolColor();
+		//find the heuristic of the head. 
 		double s = heuristic(head.state);
+		//min is the placeholder for the new threshold which will be passed along the 
+		//call of the recursion function. 
 		double min = 0; 
-		//System.out.println(head.thre);
 		
 		Node n = DFS(head, s, head.cost, min);
 		//System.out.println(n);
+		//when the returned node is an "empty" node which is used to contain the new threshold. 
 		while(n.state == null && n.action == "" && n.parent == null)
 		{
-			//System.out.println(n.action);
 			n = DFS(head, n.cost, head.cost, min);
 		}
+		//The program will get here only if it finds a solution
+		//the arraylist is used hold all the solutions 
 		ArrayList<String> solution = new ArrayList<String>();
+		//from the returned node and trace back to the initial node to get a sequence of actions
 		Node current = n;
+		@SuppressWarnings("unused")
 		int size = 0;
 		//System.out.println(n.action);
 		while(current.parent != null)
@@ -44,22 +51,29 @@ public class Solver
 			current = current.parent;
 			size ++;
 		}
-		for(int i=size-1; i>=0;i--)
+		System.out.println("The solution has "+ solution.size()+" actions!");
+		//print out the solution
+		for(int i = solution.size()-1; i>-1;i--)
 		{
 			System.out.println(solution.get(i));
 		}
 		System.out.println("Done!");
 	}
 	//depth first search
-	//It takes the requested depth as an int
-	//Returns a Node in which the state is solved, null if it cannot
+	//n: the node that will be expanded
+	//threshold: the threshold of the current iteration that will be used to cutoff branches
+	//fn: the evaluation of node n
+	//inc: the increment for the new threshold which will be the minimum evaluation value of the nodes that have been cut.
+	//Returns a Node in which the state is solved, otherwise an empty node with new threshold.
 	public Node DFS(Node n, double threshold, double fn, double inc)
 	{
 		//double fn =cost + heuristic(n.getState());
+		//if node n is the goal, return n.
 		if(n.getState().isSolved())
 		{
 			return n;
 		}
+		//if node n exceeds the threshold, return "empty" node which holds the new candidate of the threshold
 		if(fn > threshold)
 		{
 			Node fnode;
@@ -70,7 +84,9 @@ public class Solver
 			fnode = new Node(null,null,"",inc);
 			return fnode;
 		}
+		//list of children if the node is neither the goal or exceeds the threshold.
 		ArrayList<Node> children = new ArrayList<Node>();
+		//the if conditions are used to prevent repeat state. 
 		if(n.action != "counterleft")
 		{
 			Cube cl = (Cube)n.getState().clone();
@@ -115,11 +131,13 @@ public class Solver
 		{
 			Cube ccb = (Cube)n.getState().clone();
 			ccb.back(3);
-			Node ccback = new Node(ccb,n,"front",fn+1+heuristic(ccb));
+			Node ccback = new Node(ccb,n,"counterback",fn+1+heuristic(ccb));
 			Node tcb =DFS(ccback, threshold,ccback.cost,inc);
 			children.add(tcb);
 		}
 		Node mini = new Node(null,null,"",0);
+		//for all the children, if one of them is the goal then return the goal. 
+		//if none of them is the goal, then find the minimum of the empty state and return that empty node.
 		for(int i = 0; i<children.size();i++)
 		{
 			//System.out.println(children[i]);
@@ -141,6 +159,8 @@ public class Solver
 
 
     //this function is used to calculate the heuristic of the state
+	//go through every square and compare them to the color that has been set for the face in order to calculate 
+	//the misplaced squares.
 	//c: current state
 	//h: heuristic function f(n)
 	public double heuristic(Cube c)
@@ -162,8 +182,10 @@ public class Solver
 		return h;
 		
 	}
+	//find out what of the each face should be set to. 
 	public void defineSolColor()
 	{
+		//arraylist contains all the colors. 
 		ArrayList<String> colors = new ArrayList<String>();
 		colors.add("#84A59D");
 		colors.add("#98C1D9");
@@ -172,6 +194,8 @@ public class Solver
 		colors.add("#BCB8B1");
 		colors.add("#DDA15E");
 		//Face[] f = SortFace();
+		//in order to minimize h(n), go through each face, find out the number of squares of each color and 
+		//sort the number. 
 		int c[][] = new int [4][3];
 		int max[];
 		int maxInd;
@@ -189,6 +213,7 @@ public class Solver
 			c[3][0] = 0;
 			c[3][1] = 1;
 			c[3][2] = 1;
+			//compare color of squares of with other squares
 			if (head.state.getFaces()[m].getSquares()[0][1].equals(head.state.getFaces()[m].getSquares()[0][0]))
 			{
 				c[0][0]++;
@@ -214,6 +239,10 @@ public class Solver
 				c[2][0]++;
 			}
 			int n = 0;
+			//sort the numbers
+			//the array contains the number is a 2D array
+			//the first element of the subarray is the number, the second is the index of
+			//the square.
 			while (!isSort(c))
 			{
 				max = c[n];
@@ -225,6 +254,8 @@ public class Solver
 						max = c[l];
 						maxInd = l;
 					}
+					//if there are two colors with number 2, then use the origin color of the face.
+					//this set a priority for the color which will minimize the number misplaced squares. 
 					else if(head.state.getFaces()[m].getSquares()[c[l][1]][c[l][2]].getColor() == head.state.getFaces()[m].getOrigiColor() && c[l][0] == max[0])
 					{
 						max = c[l];
@@ -236,6 +267,9 @@ public class Solver
 				c[maxInd] = temp;
 				n++;
 			}
+			//if the colors arraylist has the color with the largest number, then set the
+			//color to be the color with the largest number, it the color is not in the arraylist,
+			//try the second large one. After setting the color, remove the used from the from arraylist. 
 			int t;
 			for(int h = 0; h<4;h++)
 			{	
@@ -249,6 +283,8 @@ public class Solver
 			}
 
 		}
+		//go through each face and find out if there are any faces who have not been set
+		//if there are, then use the first color left in the arraylist and remove it after setting. 
 		for(int m = 0; m<6;m++)
 		{
 			if(head.state.getFaces()[m].getSolColor() == "")
@@ -260,6 +296,7 @@ public class Solver
 			
 	}
 	//this is a helper function to help define the color of each face
+	//it helps decide of the numbers of colors have been sorted
 	public boolean isSort(int arr[][])
 	{
 		if(!(arr[0][0] >= arr[1][0] && arr[0][0] >= arr[2][0] && arr[0][0] >= arr[3][0]))
