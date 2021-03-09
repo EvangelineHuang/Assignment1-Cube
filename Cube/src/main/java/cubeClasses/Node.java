@@ -1,6 +1,4 @@
-package searchSolution;
-
-import cubeClasses.*;
+package cubeClasses;
 
 public class Node 
 {
@@ -21,7 +19,7 @@ public class Node
 	//used to print out the node
 	//used for debugging 
 	public String toString() {
-		return "Node [state=" + state + ", action=" + action + ", parent=" + parent + ", cost=" + cost + ", thre="
+		return "Node [state=" + state + ", action=" + action + ", parent=" + parent + ", cost=" + cost 
 				 + "]";
 	}
 	//getters and setters. 

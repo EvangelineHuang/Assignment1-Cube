@@ -1,42 +1,46 @@
-package searchSolution;
+package cubeClasses;
 
 
 import java.util.ArrayList;
 
-import cubeClasses.*;
-
 public class Solver 
 {
 	Node head;
-	
+	int counter;
 	//instantiates a solver
 	//This method takes the initial cube and returns a node(head) that will be plugged into one of the solving methods
 	public Solver(Cube c)
 	{
-
 		head = new Node(c, null,"", 0);
+		counter = 0; 
 	}
 	//Iterative deepening search
 	//will not return anything, but will print the solution if there is one. 
 	public void IDA()
 	{
+		counter = 0;
+		long startTime = System.currentTimeMillis();
+		//counter++;
 		//defineSolColor();
 		//double s = heuristic(head.state);
 		//define the color of each face in order to minimize f(n)
-		defineSolColor();
+		defineSolColor(head.state);
+
 		//find the heuristic of the head. 
 		double s = heuristic(head.state);
 		//min is the placeholder for the new threshold which will be passed along the 
 		//call of the recursion function. 
 		double min = 0; 
 		
-		Node n = DFS(head, s, head.cost, min);
-		//System.out.println(n);
+		Node n = DFS(head, s, head.cost,min);
+		
+		//System.out.println(head);
 		//when the returned node is an "empty" node which is used to contain the new threshold. 
 		while(n.state == null && n.action == "" && n.parent == null)
-		{
-			n = DFS(head, n.cost, head.cost, min);
+		{		
+			n = DFS(head, n.cost, head.cost,min);			
 		}
+		
 		//The program will get here only if it finds a solution
 		//the arraylist is used hold all the solutions 
 		ArrayList<String> solution = new ArrayList<String>();
@@ -57,7 +61,19 @@ public class Solver
 		{
 			System.out.println(solution.get(i));
 		}
-		System.out.println("Done!");
+		//System.out.println("Done!");
+		
+		long endTime = System.currentTimeMillis();
+		long timeElapsed = endTime - startTime;
+		System.out.println("CPU time in milliseconds: "+timeElapsed);
+		System.out.println(counter + " nodes.");
+
+	}
+	public int getCounter() {
+		return counter;
+	}
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 	//depth first search
 	//n: the node that will be expanded
@@ -67,6 +83,7 @@ public class Solver
 	//Returns a Node in which the state is solved, otherwise an empty node with new threshold.
 	public Node DFS(Node n, double threshold, double fn, double inc)
 	{
+		counter ++;
 		//double fn =cost + heuristic(n.getState());
 		//if node n is the goal, return n.
 		if(n.getState().isSolved())
@@ -93,6 +110,10 @@ public class Solver
 			cl.left(1);
 			Node left = new Node(cl,n,"left",fn+1+heuristic(cl));
 			Node tl = DFS(left, threshold,left.cost,inc);
+			if(tl.state != null && tl.state.isSolved())
+			{
+				return tl;
+			}
 			children.add(tl);
 		}
 		if(n.action != "counterback")
@@ -101,6 +122,10 @@ public class Solver
 			cb.back(1);
 			Node back = new Node(cb,n,"back",fn+1+heuristic(cb));
 			Node tb =DFS(back, threshold,back.cost,inc);
+			if(tb.state != null && tb.state.isSolved())
+			{
+				return tb;
+			}
 			children.add(tb);
 		}
 		if(n.action != "counterup")
@@ -109,6 +134,10 @@ public class Solver
 			cu.up(1);
 			Node up = new Node(cu,n,"up",fn+1+heuristic(cu));
 			Node tu =DFS(up, threshold,up.cost,inc);
+			if(tu.state != null && tu.state.isSolved())
+			{
+				return tu;
+			}
 			children.add(tu);
 		}
 		if(n.action != "up")
@@ -117,6 +146,10 @@ public class Solver
 			ccu.up(3);
 			Node ccup = new Node(ccu,n,"counterup",fn+1+heuristic(ccu));
 			Node tcu =DFS(ccup, threshold,ccup.cost,inc);
+			if(tcu.state != null && tcu.state.isSolved())
+			{
+				return tcu;
+			}
 			children.add(tcu);
 		}
 		if(n.action != "left")
@@ -125,6 +158,10 @@ public class Solver
 			ccl.left(3);
 			Node ccleft = new Node(ccl,n,"counterleft",fn+1+heuristic(ccl));
 			Node tcl =DFS(ccleft, threshold,ccleft.cost,inc);
+			if(tcl.state != null &&tcl.state.isSolved())
+			{
+				return tcl;
+			}
 			children.add(tcl);
 		}
 		if(n.action != "back")
@@ -133,6 +170,10 @@ public class Solver
 			ccb.back(3);
 			Node ccback = new Node(ccb,n,"counterback",fn+1+heuristic(ccb));
 			Node tcb =DFS(ccback, threshold,ccback.cost,inc);
+			if(tcb.state != null && tcb.state.isSolved())
+			{
+				return tcb;
+			}
 			children.add(tcb);
 		}
 		Node mini = new Node(null,null,"",0);
@@ -140,11 +181,6 @@ public class Solver
 		//if none of them is the goal, then find the minimum of the empty state and return that empty node.
 		for(int i = 0; i<children.size();i++)
 		{
-			//System.out.println(children[i]);
-			if(children.get(i).state != null && children.get(i).state.isSolved())
-			{
-				return children.get(i);
-			}
 			//System.out.println(children[i]);
 			if(children.get(i).state == null && children.get(i).action == "" && children.get(i).parent == null)
 			{
@@ -165,7 +201,12 @@ public class Solver
 	//h: heuristic function f(n)
 	public double heuristic(Cube c)
 	{
+		if(c.isSolved())
+		{
+			return 0;
+		}
 		double h = 0;
+		//System.out.println(h);
 		for(int i = 0; i<6;i++)
 		{
 			for(int j = 0; j<2;j++)
@@ -175,15 +216,18 @@ public class Solver
 					if(c.getFaces()[i].getSquares()[j][m].getColor() != c.getFaces()[i].getSolColor())
 					{
 						h = h+0.125;
+						//System.out.println(c.getFaces()[i].getSquares()[j][m].getColor());
+						//System.out.println(c.getFaces()[i].getSolColor());
 					}
 				}
 			}
 		}
+		//System.out.println(h);
 		return h;
 		
 	}
 	//find out what of the each face should be set to. 
-	public void defineSolColor()
+	public void defineSolColor(Cube cube)
 	{
 		//arraylist contains all the colors. 
 		ArrayList<String> colors = new ArrayList<String>();
@@ -214,27 +258,27 @@ public class Solver
 			c[3][1] = 1;
 			c[3][2] = 1;
 			//compare color of squares of with other squares
-			if (head.state.getFaces()[m].getSquares()[0][1].equals(head.state.getFaces()[m].getSquares()[0][0]))
+			if (cube.getFaces()[m].getSquares()[0][1].equals(cube.getFaces()[m].getSquares()[0][0]))
 			{
 				c[0][0]++;
 			}
-			if (head.state.getFaces()[m].getSquares()[1][0].equals(head.state.getFaces()[m].getSquares()[0][0]))
+			if (cube.getFaces()[m].getSquares()[1][0].equals(cube.getFaces()[m].getSquares()[0][0]))
 			{
 				c[0][0]++;
 			}
-			else if (head.state.getFaces()[m].getSquares()[1][0].equals(head.state.getFaces()[m].getSquares()[0][1]))
+			else if (cube.getFaces()[m].getSquares()[1][0].equals(cube.getFaces()[m].getSquares()[0][1]))
 			{
 				c[1][0]++;
 			}
-			if (head.state.getFaces()[m].getSquares()[1][1].equals(head.state.getFaces()[m].getSquares()[0][0]))
+			if (cube.getFaces()[m].getSquares()[1][1].equals(cube.getFaces()[m].getSquares()[0][0]))
 			{
 				c[0][0]++;
 			}
-			else if (head.state.getFaces()[m].getSquares()[1][1].equals(head.state.getFaces()[m].getSquares()[0][1]))
+			else if (cube.getFaces()[m].getSquares()[1][1].equals(cube.getFaces()[m].getSquares()[0][1]))
 			{
 				c[1][0]++;
 			}
-			else if (head.state.getFaces()[m].getSquares()[1][1].equals(head.state.getFaces()[m].getSquares()[1][0]))
+			else if (cube.getFaces()[m].getSquares()[1][1].equals(cube.getFaces()[m].getSquares()[1][0]))
 			{
 				c[2][0]++;
 			}
@@ -256,7 +300,7 @@ public class Solver
 					}
 					//if there are two colors with number 2, then use the origin color of the face.
 					//this set a priority for the color which will minimize the number misplaced squares. 
-					else if(head.state.getFaces()[m].getSquares()[c[l][1]][c[l][2]].getColor() == head.state.getFaces()[m].getOrigiColor() && c[l][0] == max[0])
+					else if(cube.getFaces()[m].getSquares()[c[l][1]][c[l][2]].getColor() == cube.getFaces()[m].getOrigiColor() && c[l][0] == max[0])
 					{
 						max = c[l];
 						maxInd = l;
@@ -273,10 +317,10 @@ public class Solver
 			int t;
 			for(int h = 0; h<4;h++)
 			{	
-				if(colors.contains(head.state.getFaces()[m].getSquares()[c[h][1]][c[h][2]].getColor()))
+				if(colors.contains(cube.getFaces()[m].getSquares()[c[h][1]][c[h][2]].getColor()))
 				{
-					head.state.getFaces()[m].setSolColor(head.state.getFaces()[m].getSquares()[c[h][1]][c[h][2]].getColor());
-					t = colors.indexOf(head.state.getFaces()[m].getSquares()[c[h][1]][c[h][2]].getColor());
+					cube.getFaces()[m].setSolColor(cube.getFaces()[m].getSquares()[c[h][1]][c[h][2]].getColor());
+					t = colors.indexOf(cube.getFaces()[m].getSquares()[c[h][1]][c[h][2]].getColor());
 					colors.remove(t);
 					break;
 				}
@@ -287,9 +331,9 @@ public class Solver
 		//if there are, then use the first color left in the arraylist and remove it after setting. 
 		for(int m = 0; m<6;m++)
 		{
-			if(head.state.getFaces()[m].getSolColor() == "")
+			if(cube.getFaces()[m].getSolColor() == "")
 			{
-				head.state.getFaces()[m].setSolColor(colors.get(0));
+				cube.getFaces()[m].setSolColor(colors.get(0));
 				colors.remove(0);
 			}
 		}

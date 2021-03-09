@@ -579,23 +579,25 @@ public class Cube implements A1Cube
 	public void randomize(int k) {
 		Random gen = new Random();
 		int currentFace;//random Face
-		int amountOfTurns;//random number of rotations
+		//int 1;//random number of rotations
 		int randir; //random direction
 		for (int x = 0; x<k; x++)
 		{
+			//System.out.println(x);
 			randir = gen.nextInt(2);
 			//System.out.println(randir);
-			amountOfTurns = gen.nextInt(2)+1;
+			//1 = gen.nextInt(2)+1;
+			//System.out.println(1);
 			currentFace = gen.nextInt(6);
 			if(currentFace == 0)
 			{	
 				if(randir == 0)
 				{
-					front(amountOfTurns*3);
+					front(3);
 				}
 				else 
 				{
-					front(amountOfTurns);
+					front(1);
 				}
 				
 			}
@@ -603,11 +605,11 @@ public class Cube implements A1Cube
 			{
 				if(randir == 0)
 				{
-					up(amountOfTurns*3);
+					up(3);
 				}
 				else 
 				{
-					up(amountOfTurns);
+					up(1);
 				}
 				
 			}
@@ -615,11 +617,11 @@ public class Cube implements A1Cube
 			{
 				if(randir == 0)
 				{
-					right(amountOfTurns*3);
+					right(3);
 				}
 				else 
 				{
-					right(amountOfTurns);
+					right(1);
 				}
 				
 			}
@@ -627,33 +629,33 @@ public class Cube implements A1Cube
 			{
 				if(randir == 0)
 				{
-					back(amountOfTurns*3);
+					back(3);
 				}
 				else 
 				{
-					back(amountOfTurns);
+					back(1);
 				}
 			}
 			else if(currentFace == 4)
 			{
 				if(randir == 0)
 				{
-					down(amountOfTurns*3);
+					down(3);
 				}
 				else 
 				{
-					down(amountOfTurns);
+					down(1);
 				}
 			}
 			else if(currentFace == 5)
 			{
 				if(randir == 0)
 				{
-					left(amountOfTurns*3);
+					left(3);
 				}
 				else 
 				{
-					left(amountOfTurns);
+					left(1);
 				}
 			}
 		}
