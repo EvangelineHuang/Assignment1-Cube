@@ -581,14 +581,17 @@ public class Cube implements A1Cube
 		int currentFace;//random Face
 		//int 1;//random number of rotations
 		int randir; //random direction
+		int lastdir = 6;
+		int lastFace = 10;
 		for (int x = 0; x<k; x++)
 		{
-			//System.out.println(x);
 			randir = gen.nextInt(2);
-			//System.out.println(randir);
-			//1 = gen.nextInt(2)+1;
-			//System.out.println(1);
 			currentFace = gen.nextInt(6);
+			while (randir!=lastdir && currentFace==lastFace)
+			{
+				randir = gen.nextInt(2);
+				currentFace = gen.nextInt(6);
+			}
 			if(currentFace == 0)
 			{	
 				if(randir == 0)
@@ -658,6 +661,9 @@ public class Cube implements A1Cube
 					left(1);
 				}
 			}
+			lastFace = currentFace;
+			lastdir = randir;
+			
 		}
 		isSolved = isSolved();
 		//System.out.println(isSolved);

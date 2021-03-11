@@ -24,7 +24,7 @@ public class A2 {
 		{
 		//while (true)
 		//{
-			//System.out.println("k = "+k);
+			System.out.println("k = "+k);
 			System.out.println("Cube1");
 			Cube c1 = new Cube();
 			c1.randomize(k);

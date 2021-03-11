@@ -57,10 +57,10 @@ public class Solver
 		}
 		System.out.println("The solution has "+ solution.size()+" actions!");
 		//print out the solution
-		for(int i = solution.size()-1; i>-1;i--)
+		/*for(int i = solution.size()-1; i>-1;i--)
 		{
 			System.out.println(solution.get(i));
-		}
+		}*/
 		//System.out.println("Done!");
 		
 		long endTime = System.currentTimeMillis();
